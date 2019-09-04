@@ -1,0 +1,19 @@
+%装载并显示原始图像
+load clown;
+subplot(1,2,1);
+image(X);
+colormap(map);
+title('原始图像');
+%采用默认的全局阈值
+[thr,sorh,keepapp,crit]=ddencmp('cmp','wp',X);
+%图像压缩
+[Xc,treed,perf0,perfl2]=wpdencmp(X,sorh,3,'bior3.1',crit,thr,keepapp);
+subplot(1,2,2);
+image(Xc);
+colormap(map);
+title('压缩后的图像');
+%给出压缩效率
+disp('小波分解系数中置0的系数个数百分比：');
+perf0
+disp('压缩后图像剩余能量百分比：');
+perfl2

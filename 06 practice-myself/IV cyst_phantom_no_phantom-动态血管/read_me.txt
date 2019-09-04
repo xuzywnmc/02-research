@@ -1,3 +1,0 @@
-本程序用来测试在没有囊肿情况下 只是制造散射点
-但是和IIIIII cyst_phantom_no_phantom区别在于
-这个程序没有囊肿情况下是借鉴动态血管模型中cyst_pht.m写法
