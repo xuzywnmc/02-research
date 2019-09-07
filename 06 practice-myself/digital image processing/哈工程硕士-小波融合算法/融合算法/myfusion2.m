@@ -1,0 +1,17 @@
+clear all;
+close all;
+x=imread('12.jpg');
+y=imread('21.jpg');
+%a=rgb2gray(x);
+%b=rgb2gray(y);
+a=double(x);
+b=double(y);
+[c1,s1]=wavedec2(x,1,'bior2.4');
+[c2,s2]=wavedec2(x,1,'bior2.4');
+c=c1+c2;
+c=0.5*c;
+new=waverec2(c,s1,'bior2.4');
+new=uint8(new);
+figure;
+imshow(new);
+imwrite(new,'myfusion2.bmp');
