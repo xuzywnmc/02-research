@@ -1,0 +1,46 @@
+﻿  mallat.cpp
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(98): error C2084: 函数“int Upsampling(double *,int,double [])”已有主体
+  c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(22): note: 参见“Upsampling”的前一个定义
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(192): error C2653: “Wavelet”: 不是类或命名空间名称
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(192): error C2061: 语法错误: 标识符“Filter”
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(196): error C2065: “cA”: 未声明的标识符
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(196): error C2065: “cD”: 未声明的标识符
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(199): error C2065: “m_db”: 未声明的标识符
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(199): error C2065: “db”: 未声明的标识符
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(200): error C2065: “m_db”: 未声明的标识符
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(204): error C2131: 表达式的计算结果不是常数
+  c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(204): note: 因读取超过生命周期的变量而失败
+  c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(204): note: 请参见“dataLen”的用法
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(205): error C2131: 表达式的计算结果不是常数
+  c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(205): note: 因读取超过生命周期的变量而失败
+  c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(205): note: 请参见“dataLen”的用法
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(206): error C2131: 表达式的计算结果不是常数
+  c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(206): note: 因读取超过生命周期的变量而失败
+  c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(206): note: 请参见“dataLen”的用法
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(224): error C2065: “db”: 未声明的标识符
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(225): error C2065: “db”: 未声明的标识符
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(228): error C2065: “cA”: 未声明的标识符
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(229): error C2065: “cD”: 未声明的标识符
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(244): error C2653: “Wavelet”: 不是类或命名空间名称
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(244): error C2061: 语法错误: 标识符“Filter”
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(246): error C2065: “recData”: 未声明的标识符
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(249): error C2065: “m_db”: 未声明的标识符
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(249): error C2065: “db”: 未声明的标识符
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(250): error C2065: “m_db”: 未声明的标识符
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(257): error C2131: 表达式的计算结果不是常数
+  c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(257): note: 因读取超过生命周期的变量而失败
+  c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(257): note: 请参见“recLen”的用法
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(258): error C2131: 表达式的计算结果不是常数
+  c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(258): note: 因读取超过生命周期的变量而失败
+  c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(258): note: 请参见“recLen”的用法
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(260): error C2131: 表达式的计算结果不是常数
+  c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(260): note: 因读取超过生命周期的变量而失败
+  c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(260): note: 请参见“cALength”的用法
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(261): error C2131: 表达式的计算结果不是常数
+  c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(261): note: 因读取超过生命周期的变量而失败
+  c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(261): note: 请参见“cALength”的用法
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(269): error C2065: “Upsampling”: 未声明的标识符
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(270): error C2065: “Upsampling”: 未声明的标识符
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(273): error C2065: “db”: 未声明的标识符
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(275): error C2065: “db”: 未声明的标识符
+c:\e-data-grounp\github\02-research\06 practice-myself\digital image processing\dwt\test-mallat\c++\mallat\mallat\mallat.cpp(281): error C2065: “recData”: 未声明的标识符
