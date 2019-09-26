@@ -40,7 +40,7 @@ disp(' ');
 if ~exist('im', 'var')
     % Zoneplate image: good for illustrating multiscale and directional
     % decomposition
-    im = imread ('lena512.bmp') ;
+    im = imread ('zoneplate.png') ;
 end
 
 % Show the input image

@@ -30,15 +30,15 @@ GDEC=zeros(level,row,col); % % save the Gaussian decomposition image
 GDEC=GDEC-1;         % % the reason to subtract 1 is used to judge the edge of the extracted image;
 
 for(flag=1:level)  
- G_LOWER=G_LOWER(1:2:end,1:2:end); % % 隔行隔列取点,也就是金字塔分解，这个是重点~！！！！
+    G_LOWER=G_LOWER(1:2:end,1:2:end); % % 隔行隔列取点,也就是金字塔分解，这个是重点~！！！！
 
-DECIM=conv2(G_LOWER,W,'same');
-[decrow,deccol]=size(DECIM);
+    DECIM=conv2(G_LOWER,W,'same');
+    [decrow,deccol]=size(DECIM);
 
-GDEC(flag,1:decrow,1:deccol)=DECIM; % % save the decomposed image
-I=GDEC;
-figure
-imshow(uint8(DECIM));
+    GDEC(flag,1:decrow,1:deccol)=DECIM; % % save the decomposed image
+    I=GDEC;
+    figure
+    imshow(DECIM,[]);
 end
 save GDEC;
 % figure
