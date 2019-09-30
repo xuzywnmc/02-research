@@ -27,3 +27,4 @@ ksig1 = fspecial('gaussian', [5 5], 0.4);
 A = imfilter(img, ksig1);
 figure('name','gaussian-img');
 imshow(A, [ ])
+tt=diag(2,2)

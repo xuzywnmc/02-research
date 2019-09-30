@@ -45,21 +45,21 @@ switch fname
 	    % beta(z^2)
 	    beta2 = zeros(1, 2*lf-1);
 	    beta2(1:2:end) = beta;
-	
-	    % H(z)
+% 	
+% 	    % H(z)
 	    h = beta2;
-	    h(2*n) = h(2*n) + 1;
+  	    h(2*n) = h(2*n) + 1;
 	    h = h / 2;
-	
-	    % G(z)
+% 	
+% 	    % G(z)
 	    g = -conv(beta2, h);
 	    g(4*n-1) = g(4*n-1) + 1;
 	    g(2:2:end) = -g(2:2:end);
-	
-	    % Normalize
+% 	
+% 	    % Normalize
 	    h = h * sqrt(2);
 	    g = g * sqrt(2);
 
     otherwise
 	    [h, g] = wfilters(fname, 'l');
-end
+ end

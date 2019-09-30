@@ -1,4 +1,4 @@
-function coeffs = decdemo( im, option )
+%function coeffs = decdemo( im, option )
 % DECDEMO   Demonstrates contourlet decomposition and reconstruction. 
 %
 %   DECDEMO shows how to use the contourlet toolbox to decompose
@@ -66,39 +66,38 @@ dfilter = 'pkva' ;              % Directional filter
 
 % % Contourlet decomposition
 coeffs = pdfbdec( double(im), pfilter, dfilter, nlevels );
-
 % % Display the coefficients
-disp('Displaying the contourlet coefficients...') ;
-imcoeff = showpdfb( coeffs ) ;
-title('Contourlet coefficients');
-input('Press Enter key to continue...' ) ;
-disp(' ');
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Pyramidal directional filter bank (PDFB) reconstruction.
-% This is the inverse of pdfbdec, i.e.
-% imrec = pdfbrec(coeffs, pfilter, dfilter);
-% would reconstruct imrec = im
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Reconstruct image
-imrec = pdfbrec( coeffs, pfilter, dfilter ) ;
-
-disp('Displaying the reconstructed image...') ;
-disp('It should be a perfect reconstruction' ) ;
-disp(' ') ;
-
-% Show the reconstruction image and the original image
-subplot(1,2,1), imagesc( im, [0, 255] ); 
-title('Original image' ) ;
-axis image off;
-subplot(1,2,2), imagesc( imrec, [0, 255] );
-title('Reconstructed image' ) ;
-axis image off;
-
-mse = sum( sum( (imrec - double(im)).^2 ) );
-mse = mse / prod(size(im));
-
-disp( sprintf('The mean square error is: %f', mse ) );
-disp(' ');
+% disp('Displaying the contourlet coefficients...') ;
+ imcoeff = showpdfb( coeffs ) ;
+% title('Contourlet coefficients');
+% input('Press Enter key to continue...' ) ;
+% disp(' ');
+% 
+% 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % Pyramidal directional filter bank (PDFB) reconstruction.
+% % This is the inverse of pdfbdec, i.e.
+% % imrec = pdfbrec(coeffs, pfilter, dfilter);
+% % would reconstruct imrec = im
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% % Reconstruct image
+% imrec = pdfbrec( coeffs, pfilter, dfilter ) ;
+% 
+% disp('Displaying the reconstructed image...') ;
+% disp('It should be a perfect reconstruction' ) ;
+% disp(' ') ;
+% 
+% % Show the reconstruction image and the original image
+% subplot(1,2,1), imagesc( im, [0, 255] ); 
+% title('Original image' ) ;
+% axis image off;
+% subplot(1,2,2), imagesc( imrec, [0, 255] );
+% title('Reconstructed image' ) ;
+% axis image off;
+% 
+% mse = sum( sum( (imrec - double(im)).^2 ) );
+% mse = mse / prod(size(im));
+% 
+% disp( sprintf('The mean square error is: %f', mse ) );
+% disp(' ');
