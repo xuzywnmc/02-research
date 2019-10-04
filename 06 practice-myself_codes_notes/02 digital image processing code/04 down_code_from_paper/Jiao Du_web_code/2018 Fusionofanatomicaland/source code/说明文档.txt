@@ -1,0 +1,13 @@
+%This code can only be used for research purpose only. 
+%Please cite the following paper if you use it:
+%J. Bao, W.S. Li and B. Xiao
+%Fusion of anatomical and functional images using parallel saliency features
+%Information Sciences, vol. 430-431, pp. 567-576, Mar. 2018. 
+
+Note: add the files named CSF and ESF to the current path
+Then, run the files with the order: test1.m, run_saliency.m, test2.m and test3.m
+
+test 1: image decomposition
+run_saliency.m: to get the CSF feature of the input image in pseudo-color
+test 2: the salience features of the decomposed images: CSF and ESF
+test 3: image reconstruction
