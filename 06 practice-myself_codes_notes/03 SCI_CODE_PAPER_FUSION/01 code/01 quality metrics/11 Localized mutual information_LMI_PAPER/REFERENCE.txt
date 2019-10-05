@@ -1,0 +1,1 @@
+M. Hossny, S. Nahavandi, D. Creighton, and A. Bhatti, “Image fusion performance metric based on mutual information and entropy driven quadtree decomposition,” Electron. Lett., vol. 46, no. 18, pp. 1266–1268, 2010.

@@ -1,0 +1,1 @@
+Y. Liu, S. Liu, and Z. Wang, “A general framework for image fusion based on multi-scale transform and sparse representation,” Inf. Fusion, vol. 24, pp. 147–164, Jul. 2015. 

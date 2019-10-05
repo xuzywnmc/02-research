@@ -1,0 +1,1 @@
+ L. Liu, B. Liu, H. Huang, and A. C. Bovik, “No-reference image quality assessment based on spatial and spectral entropies,” Signal Process., Image Commun., vol. 29, no. 8, pp. 856–863, 2014.

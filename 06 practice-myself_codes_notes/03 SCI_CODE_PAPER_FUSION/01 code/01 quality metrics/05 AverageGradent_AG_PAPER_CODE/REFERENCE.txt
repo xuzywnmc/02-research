@@ -1,0 +1,2 @@
+ R. Singh and A. Khare, “Multiscale medical image fusion in wavelet domain,” Sci. World J., vol. 5, Dec. 2013, Art. no. 521034. 
+N. Chabi, M. Yazdi, and M. Entezarmahdi, “An efﬁcient image fusion method based on dual tree complex wavelet transform,” in Proc. 8th Iranian Conf. Mach. Vis. Image Process., 2013, pp. 403–407. 

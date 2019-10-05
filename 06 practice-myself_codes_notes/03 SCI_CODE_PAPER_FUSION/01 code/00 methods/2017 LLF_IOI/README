@@ -1,0 +1,27 @@
+%
+% These scripts implement edge-aware detail and tone manipulation as 
+% described in Paris, Hasinoff, and Kautz, "Local Laplacian Filters:
+% Edge-aware Image Processing with a Laplacian Pyramid", ACM 
+% Transactions on Graphics (Proc. SIGGRAPH 2011), 30(4), 2011.
+%
+% The key scripts for the proposed fusion method:
+&&   the_proposed_fusion_method.m      - the main function of the proposed method  
+&&   lapfilter_core.m                  - the core algorithm of the propsoed fusion method           
+&&   fusionrule_lowpass.m              - information of interest based image fusion rule for approximate image(lowpass image) decomposed by local Laplacian filter
+&&   fusionrule_highpass.m             - information of interest based image fusion rule for residual image(highpass image) decomposed by local Laplacian filter
+
+% Includes Laplacian pyramid routines adapted from Tom Mertens'
+% Matlab implementation.
+%
+&& The key scripts for the objective metrics evaluation for the fused images:
+&&   objective_metric_evaluation.m     - the main function of the objective metrics for the fused images 
+&&   evaluation1.m                     - the core algorithm of the objective metrics for the fused images
+&&   space_frequency.m                 - the space frequency (SF) function
+&&   edge_intensity.m                  - the edge intensity (EI) function
+&&   mutinf.m                          - the mutual information (MI) function
+&&   TMQI.m                            - the  tone-mapped image quality index  tone-mapped image quality index (TMQI) function
+
+
+
+% sam.hasinoff@gmail.com, April 2011
+&& dujiao19880429@126.com, May 2017

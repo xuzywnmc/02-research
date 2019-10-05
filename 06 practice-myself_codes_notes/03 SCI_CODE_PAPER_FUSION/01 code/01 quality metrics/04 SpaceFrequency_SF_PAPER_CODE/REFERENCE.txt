@@ -1,0 +1,1 @@
+Y. Zheng et al., “A new metric based on extended spatial frequency and its application to DWT based fusion algorithms,” Inf. Fusion, vol. 8, no. 2, pp. 177–192, 2007. 

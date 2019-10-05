@@ -1,0 +1,4 @@
+Y. Wang et al., “A no-reference perceptual blur metric based on complex edge analysis,” in Proc. IEEE Int. Conf. Netw. Infrastruct. Digit. Content, Sep. 2013, pp. 487–491. 
+
+
+X. Ma et al., “A no-reference image blur metric based on two-pass edge analysis,” in Proc. Int. Conf. Natural Comput., 2015, pp. 919–924. 
