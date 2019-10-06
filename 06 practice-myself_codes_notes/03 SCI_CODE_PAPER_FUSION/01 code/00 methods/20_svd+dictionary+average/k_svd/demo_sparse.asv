@@ -1,0 +1,12 @@
+y = double(imread('MRI-009.jpg'));
+image = imresize(y, [256,256]);
+input = image(:,:,1);
+output = dictionary(input);
+
+% % % % % % % % % % 
+y1 = double(imread('MRI-009.jpg'));
+image1 = imresize(y1, [256,256]);
+input1 = image(:,:,1);
+output = dictionary(input);
+
+% figure, imshow(output, []);

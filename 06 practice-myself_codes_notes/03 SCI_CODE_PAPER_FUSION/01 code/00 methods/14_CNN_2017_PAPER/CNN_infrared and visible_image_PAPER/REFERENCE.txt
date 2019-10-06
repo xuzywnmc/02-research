@@ -1,0 +1,1 @@
+Yu Liu, Xun Chen, Juan Cheng, Hu Peng, Zengfu Wang,“Infrared and visible image fusion with convolutional neural networks”, International Journal of Wavelets,Multiresolution and Information Processing, vol. 16, no. 3, 1850018: 1-20, 2018.
