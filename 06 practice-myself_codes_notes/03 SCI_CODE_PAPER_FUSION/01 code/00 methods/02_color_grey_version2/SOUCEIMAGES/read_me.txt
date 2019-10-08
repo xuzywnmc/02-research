@@ -1,0 +1,1 @@
+'.\SOUCEIMAGES\cc\s\1.jpg'

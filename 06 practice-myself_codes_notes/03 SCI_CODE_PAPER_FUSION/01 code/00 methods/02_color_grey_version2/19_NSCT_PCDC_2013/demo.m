@@ -33,15 +33,15 @@ tic
 
 %%% Reading the Images
 disp('Reading the input images...');
-a=imread('CT.tif');
+a=imread('.\SOUCEIMAGES\gg\s\1.jpg');
 a=double(a);
 figure
-imshow(a,[])
+imshow(uint8(a),[])
 
-b=imread('MRI.tif');
+b=imread('.\SOUCEIMAGES\gg\s\1.jpg');
 b=double(b);
 figure
-imshow(b,[])
+imshow(uint8(b),[])
 
 %%% Fusing the Images
 disp('Checking for basic requirements...');

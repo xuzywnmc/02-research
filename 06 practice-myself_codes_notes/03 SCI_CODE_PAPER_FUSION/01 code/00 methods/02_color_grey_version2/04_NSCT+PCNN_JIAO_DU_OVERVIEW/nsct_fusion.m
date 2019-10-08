@@ -4,6 +4,8 @@ function [y,SSIM,RMSE,MI,PSNR,SF, G, P, C QE]= nsct_fusion(input1, input2 )
 
 x1=imresize(input1,[256,256]);
 x2=imresize(input2,[256,256]);
+% x1=input1;
+% x2=input2;
 
 lf=4;hf=2;
 

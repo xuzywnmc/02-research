@@ -35,14 +35,18 @@ sum_QE = 0;
 %     sum_QE = QE + sum_QE;
 % end
 
-for i=10 :12
-     dir1 = [tr,tr11,int2str(i),tr111];
-    dir2 = [tr,tr22,int2str(i),tr111];
+% for i=10 :12
+%      dir1 = [tr,tr11,int2str(i),tr111];
+%     dir2 = [tr,tr22,int2str(i),tr111];
+     dir1 = ['.\SOUCEIMAGES\gg\s\1.jpg'];
+    dir2 = ['.\SOUCEIMAGES\gg\s\2.jpg'];
+
     img1 =double(imread(dir1));
     img2= double(imread(dir2));
     [y,SSIM,RMSE,MI,PSNR,SF, G, P, C QE]= nsct_fusion(img1, img2);
-    dir3=[tr,tr3,int2str(i)];
-    imwrite(uint8(y),strcat(dir3,'.jpg'));
+    imshow(uint8(y),[])
+%     dir3=[tr,tr3,int2str(i)];
+     imwrite(uint8(y),'.\SOUCEIMAGES\result\bottle.tif');
     sum_SSIM = SSIM + sum_SSIM;
     sum_RMSE = RMSE + sum_RMSE;
     sum_MI = MI + sum_MI;
@@ -52,22 +56,22 @@ for i=10 :12
     sum_P = P + sum_P;
     sum_C = C + sum_C;
     sum_QE = QE + sum_QE;
-end
-
-fprintf('\n\n   I分量的sum_SSIM为:  :%.4f\n'  ,sum_SSIM/23);
-
-fprintf('\n\n   I分量的sum_RMSE为:  :%.4f\n'  ,sum_RMSE/23);
-
-fprintf('\n\n   I分量的sum_MI为:  :%.4f\n'  ,sum_MI/23);
-
-fprintf('\n\n   I分量的sum_PSNR为:  :%.4f\n'  ,sum_PSNR/23);
-
-fprintf('\n\n   I分量的sum_SF为:  :%.4f\n'  ,sum_SF/23);
-
-fprintf('\n\n   I分量的sum_G为:  :%.4f\n'  ,sum_G/23);
-
-fprintf('\n\n   I分量的sum_P为:  :%.4f\n'  ,sum_P/23);
-
-fprintf('\n\n   I分量的sum_C为:  :%.4f\n'  ,sum_C/23);
-
-fprintf('\n\n   I分量的sum_QE为:  :%.4f\n'  ,sum_QE/23);
+% end
+% 
+% fprintf('\n\n   I分量的sum_SSIM为:  :%.4f\n'  ,sum_SSIM/23);
+% 
+% fprintf('\n\n   I分量的sum_RMSE为:  :%.4f\n'  ,sum_RMSE/23);
+% 
+% fprintf('\n\n   I分量的sum_MI为:  :%.4f\n'  ,sum_MI/23);
+% 
+% fprintf('\n\n   I分量的sum_PSNR为:  :%.4f\n'  ,sum_PSNR/23);
+% 
+% fprintf('\n\n   I分量的sum_SF为:  :%.4f\n'  ,sum_SF/23);
+% 
+% fprintf('\n\n   I分量的sum_G为:  :%.4f\n'  ,sum_G/23);
+% 
+% fprintf('\n\n   I分量的sum_P为:  :%.4f\n'  ,sum_P/23);
+% 
+% fprintf('\n\n   I分量的sum_C为:  :%.4f\n'  ,sum_C/23);
+% 
+% fprintf('\n\n   I分量的sum_QE为:  :%.4f\n'  ,sum_QE/23);
