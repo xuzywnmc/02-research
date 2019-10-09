@@ -16,7 +16,7 @@ clc;clear
     compress_img = double(compress_img);
     fenzi = 0;    %分子项
     fenmu = 0;    %分母项
-    fenzi = 255*255;
+    fenzi = row*col;
     fenmu = sum(sum((compress_img-ideal_img).^2))/(row*col);
     snr_rms = fenzi/fenmu;
     psnr_rms = 10*log10(snr_rms);
