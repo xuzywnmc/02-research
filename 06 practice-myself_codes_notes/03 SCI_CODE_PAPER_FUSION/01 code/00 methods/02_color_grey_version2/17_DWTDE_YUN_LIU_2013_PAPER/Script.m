@@ -1,8 +1,9 @@
 clc;close all;clear;
 
-A=imread('sourceimages/lab_1.tif');      
-B=imread('sourceimages/lab_2.tif');
-figure;imshow(A);figure;imshow(B);
+% A=imread('sourceimages/lab_1.tif');      
+% B=imread('sourceimages/lab_2.tif');
+[A ,B ,result]=oral(3,'DWTDE')
+figure;imshow(uint8(A));figure;imshow(uint8(B));
 
 if size(A)~=size(B)
     error('two images are not the same size.');
@@ -21,5 +22,6 @@ else             %for color images
 end
 toc;
 
-figure;imshow(F);
-imwrite(F,'results/fused_dwtde.tif');
+figure;imshow(uint8(F));
+% imwrite(F,'results/fused_dwtde.tif');
+   imwrite(uint8(F),result)

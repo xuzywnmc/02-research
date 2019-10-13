@@ -15,10 +15,14 @@ conv3_patchsize = sqrt(conv3_patchsize2);
 conv4_patchsize = sqrt(conv4_patchsize2);
 %% load images
 
-img1  = imread('sourceimages/010_MR-Gad.tif');   %anatomical image
-img2  = imread('sourceimages/010_SPECT-Tc.tif'); %functional image
-figure;imshow(img1);
-figure;imshow(img2);
+% img1  = imread('sourceimages/010_MR-Gad.tif');   %anatomical image
+% img2  = imread('sourceimages/010_SPECT-Tc.tif'); %functional image
+[img1 ,img2,result]=oral(3,'CNN');
+temp=img1;
+img1=img2(:,:,2);
+img2=temp;
+figure;imshow(uint8(img1));
+figure;imshow(uint8(img2));
 tic;
 
 img1 = double(img1)/255;
@@ -147,6 +151,6 @@ imgf_YUV(:,:,3)=img2_YUV(:,:,3);
 imgf_RGB=ConvertYUVtoRGB(imgf_YUV);
 
 toc;
-
-figure;imshow(uint8(imgf_RGB*255));
-imwrite(uint8(imgf_RGB*255),'results/fused.tif');
+  imwrite(imgf_RGB,result)
+ figure;imshow(uint8(imgf_RGB*255));
+% imwrite(uint8(imgf_RGB*255),'results/fused.tif');

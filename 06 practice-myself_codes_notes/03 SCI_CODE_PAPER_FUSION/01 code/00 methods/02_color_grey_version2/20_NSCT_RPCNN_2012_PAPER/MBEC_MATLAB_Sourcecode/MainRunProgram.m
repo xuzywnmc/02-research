@@ -15,7 +15,7 @@
 %%% If you use the code, please cite the paper as follows:
 %%% Sudeb Das and Malay Kumar Kundu, "NSCT-basedmultimodalmedical image 
 %%% fusion using pulse-coupled neural network and modi?ed spatial
-%%% frequency”, Medical and Biological Engineering and Computing (Springer-
+%%% frequency? Medical and Biological Engineering and Computing (Springer-
 %%% MBEC), VOL. 50, NO. 10, 1105-1114, 2012.
 %%%-------------------------------------------------------------------%%%
 %% Clearing the workspace, closing all opened images, clearing the terminal
@@ -24,7 +24,7 @@ clear all, close all, clc
 % NSCT MATLAB toolbox can be found at:
 % http://in.mathworks.com/matlabcentral/fileexchange/10049-nonsubsampled-contourlet-toolbox
 % Compile the mex files according to your OS.
-path(path,'nsct_toolbox/');
+% path(path,'nsct_toolbox/');
 
 %% Inputing source images
 % --------------------------------------------------------------------------
@@ -36,8 +36,11 @@ path(path,'nsct_toolbox/');
 % imB=imread(strcat(pathname2,filename2));
 filename1 = 'a1.bmp';
 filename2 = 'b1.bmp';
-imA = imread(filename1);
-imB = imread(filename2);
+% imA= imread(filename1);
+% imB= imread(filename2);
+[imA,imB ,result]=oral(1,'NSCT-RPCNN')
+imA=imA(:,:,2);
+imB=imB(:,:,2);
 %% Find the filenames and extensions of the source images considering there
 % is only 1 '.' in the filename
 dotPos1 = strfind(filename1,'.');
@@ -84,26 +87,26 @@ NSCTPara.dfilt = 'vk' ;           % Directional filter
 imF  = nsctFusion(imA, imB, filter_size, Para, NSCTPara);
 
 %% Displaying different statistical measures
-sourceImage1Entropy = entropy(imA);
-sourceImage2Entropy = entropy(imB);
-fusedImageEntropy   = entropy(imF);
-sourceImage1stadardDeviation = std2(imA);
-sourceImage2stadardDeviation = std2(imB);
-fusedImagestadardDeviation = std2(imF);
-
-disp(strcat('Source image 1 entropy = ',num2str(sourceImage1Entropy)));
-disp(strcat('Source image 2 entropy = ',num2str(sourceImage2Entropy)));
-disp(strcat('Fused  image   entropy = ',num2str(fusedImageEntropy)));
-disp(strcat('Source image 1 standard deviation = ',num2str(sourceImage1stadardDeviation)));
-disp(strcat('Source image 2 standard deviation = ',num2str(sourceImage2stadardDeviation)));
-disp(strcat('Fused  image   standard deviation = ',num2str(fusedImagestadardDeviation)));
-
-
-imwrite(uint8(imF),strcat('fused_',fName1,'_',fName2,'.',extName1),extName1);
-subplot(1,3,1), imshow(imA), title('Source Image 1')
-subplot(1,3,2), imshow(imB), title('Source Image 2')
-subplot(1,3,3), imshow(imF), title('Fused Image')
-
+% sourceImage1Entropy = entropy(imA);
+% sourceImage2Entropy = entropy(imB);
+% fusedImageEntropy   = entropy(imF);
+% sourceImage1stadardDeviation = std2(imA);
+% sourceImage2stadardDeviation = std2(imB);
+% fusedImagestadardDeviation = std2(imF);
+% 
+% disp(strcat('Source image 1 entropy = ',num2str(sourceImage1Entropy)));
+% disp(strcat('Source image 2 entropy = ',num2str(sourceImage2Entropy)));
+% disp(strcat('Fused  image   entropy = ',num2str(fusedImageEntropy)));
+% disp(strcat('Source image 1 standard deviation = ',num2str(sourceImage1stadardDeviation)));
+% disp(strcat('Source image 2 standard deviation = ',num2str(sourceImage2stadardDeviation)));
+% disp(strcat('Fused  image   standard deviation = ',num2str(fusedImagestadardDeviation)));
+% 
+% 
+% % imwrite(uint8(imF),strcat('fused_',fName1,'_',fName2,'.',extName1),extName1);
+% subplot(1,3,1), imshow(uint8(imA)), title('Source Image 1')
+% subplot(1,3,2), imshow(uint8(imB)), title('Source Image 2')
+% subplot(1,3,3), imshow(uint8(imF)), title('Fused Image')
+    imwrite(imF,result)
 
 
 

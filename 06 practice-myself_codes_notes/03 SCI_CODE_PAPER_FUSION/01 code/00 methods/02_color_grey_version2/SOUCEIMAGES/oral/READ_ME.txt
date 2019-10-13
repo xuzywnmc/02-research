@@ -22,3 +22,15 @@ path='C:\E-DATA-GROUNP\github\02-research\06 practice-myself_codes_notes\03 SCI_
 %%
 [img1 ,img2 ,result]=oral(a,'HSI')
     imwrite(uint8(y),result)
+
+
+path='C:\E-DATA-GROUNP\github\02-research\06 practice-myself_codes_notes\03 SCI_CODE_PAPER_FUSION\01 code\00 methods\02_color_grey_version2\SOUCEIMAGES\oral'
+path1=strcat(path,'\MC\'),
+method='GF',
+result=strcat(path,'\result\',method,'1.jpg');
+
+
+[img1 ,img2,result]=oral(3,'CNN');
+temp=img1;
+img1=img2(:,:,2);
+img2=temp;

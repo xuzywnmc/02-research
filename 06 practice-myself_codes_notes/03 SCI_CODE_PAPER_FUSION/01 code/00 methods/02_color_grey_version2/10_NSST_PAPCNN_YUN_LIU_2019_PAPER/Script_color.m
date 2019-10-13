@@ -3,9 +3,13 @@ close all;
 clc;
 %% NSST tool box
 addpath(genpath('shearlet'));
-%%
-A=imread('sourceimages/s02_MR.tif');  %anatomical image
-B=imread('sourceimages/s02_PET.tif'); %functional image
+%% ×¢ÒâBÊÇÈýÎ¬
+% A=imread('sourceimages/s02_MR.tif');  %anatomical image
+% B=imread('sourceimages/s02_PET.tif'); %functional image
+[A ,B ,result]=oral(3,'NSST+PAPCNN');
+temp=A;
+A=B(:,:,2);
+B=temp;
 figure;imshow(A);
 figure;imshow(B);
 
@@ -26,5 +30,6 @@ imgf=ConvertYUVtoRGB(imgf_YUV);
 
 F=uint8(imgf*255);
 figure,imshow(F);
-imwrite(F,'results/fused.tif');
+imwrite(uint8(F),result)
+% imwrite(F,'results/fused.tif');
 

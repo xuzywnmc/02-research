@@ -1,11 +1,12 @@
 close all;clear all;clc;
 
-[imagename1, imagepath1]=uigetfile('Data\*.jpg;*.bmp;*.png;*.tif;*.tiff;*.pgm;*.gif','Please choose the first input image');
-image_input1=imread(strcat(imagepath1,imagename1));    
-[imagename2, imagepath2]=uigetfile('Data\*.jpg;*.bmp;*.png;*.tif;*.tiff;*.pgm;*.gif','Please choose the second input image');
-image_input2=imread(strcat(imagepath2,imagename2));    
-figure;imshow(image_input1);
-figure;imshow(image_input2);
+% [imagename1, imagepath1]=uigetfile('Data\*.jpg;*.bmp;*.png;*.tif;*.tiff;*.pgm;*.gif','Please choose the first input image');
+% image_input1=imread(strcat(imagepath1,imagename1));    
+% [imagename2, imagepath2]=uigetfile('Data\*.jpg;*.bmp;*.png;*.tif;*.tiff;*.pgm;*.gif','Please choose the second input image');
+% image_input2=imread(strcat(imagepath2,imagename2));   
+[image_input1 ,image_input2 ,result]=oral(2,'ASR')
+figure;imshow(uint8(image_input1));
+figure;imshow(uint8(image_input2));
 
 if size(image_input1)~=size(image_input2)
     error('two images are not the same size.');
@@ -44,4 +45,5 @@ toc;
 
 image_fusion=uint8(imgf);
 figure;imshow(image_fusion);
-imwrite(image_fusion,['Results\fused_asr_d' num2str(dic_size) '_n' num2str(sigma) '.tif']);
+   imwrite(uint8(imgf),result)
+% imwrite(image_fusion,['Results\fused_asr_d' num2str(dic_size) '_n' num2str(sigma) '.tif']);

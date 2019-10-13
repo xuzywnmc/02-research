@@ -32,17 +32,19 @@ clc
 tic
 
 %%% Reading the Images
-disp('Reading the input images...');
-a=imread('.\SOUCEIMAGES\gg\s\1.jpg');
-a=double(a);
-figure
-imshow(uint8(a),[])
-
-b=imread('.\SOUCEIMAGES\gg\s\1.jpg');
-b=double(b);
-figure
-imshow(uint8(b),[])
-
+% disp('Reading the input images...');
+% a=imread('.\SOUCEIMAGES\gg\s\1.jpg');
+% a=double(a);
+% figure
+% imshow(uint8(a),[])
+% 
+% b=imread('.\SOUCEIMAGES\gg\s\1.jpg');
+% b=double(b);
+% figure
+% imshow(uint8(b),[])
+[b,a ,result]=oral(1,'NSCT-PCDC')
+% a=a(:,:,2);
+% b=b(:,:,2);
 %%% Fusing the Images
 disp('Checking for basic requirements...');
 if size(a)==size(b)
@@ -51,6 +53,7 @@ if size(a)==size(b)
     disp('Displaying Fused Image');
     figure
     imshow(uint8(f))
+       imwrite(uint8(f),result)
 else
     disp('Error: The input images are of same sizes.');
 end

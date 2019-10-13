@@ -9,13 +9,13 @@ addpath(genpath('nsct_toolbox'));
 
 load('sparsefusion/Dictionary/D_100000_256_8.mat');
 
-[imagename1 imagepath1]=uigetfile('source_images\*.jpg;*.bmp;*.png;*.tif;*.tiff;*.pgm;*.gif','Please choose the first input image');
-image_input1=imread(strcat(imagepath1,imagename1));    
-[imagename2 imagepath2]=uigetfile('source_images\*.jpg;*.bmp;*.png;*.tif;*.tiff;*.pgm;*.gif','Please choose the second input image');
-image_input2=imread(strcat(imagepath2,imagename2));     
-
-figure;imshow(image_input1);
-figure;imshow(image_input2);
+% [imagename1 imagepath1]=uigetfile('source_images\*.jpg;*.bmp;*.png;*.tif;*.tiff;*.pgm;*.gif','Please choose the first input image');
+% image_input1=imread(strcat(imagepath1,imagename1));    
+% [imagename2 imagepath2]=uigetfile('source_images\*.jpg;*.bmp;*.png;*.tif;*.tiff;*.pgm;*.gif','Please choose the second input image');
+% image_input2=imread(strcat(imagepath2,imagename2));     
+[image_input1 ,image_input2 ,result]=oral(3,'MST_SR')
+figure;imshow(uint8(image_input1));
+figure;imshow(uint8(image_input2));
 
 if size(image_input1)~=size(image_input2)
     error('two images are not the same size.');
@@ -55,5 +55,6 @@ end
 toc;
 
 figure;imshow(uint8(imgf));
-imwrite(uint8(imgf),'Results/fused_mstsr.tif');
+   imwrite(uint8(imgf),result)
+% imwrite(uint8(imgf),'Results/fused_mstsr.tif');
 

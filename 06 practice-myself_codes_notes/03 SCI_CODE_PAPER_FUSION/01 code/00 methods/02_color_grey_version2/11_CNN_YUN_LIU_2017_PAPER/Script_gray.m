@@ -14,10 +14,13 @@ conv3_patchsize = sqrt(conv3_patchsize2);
 [conv4_channels,conv4_patchsize2,conv4_filters] = size(weights_output);  %512*64*2
 conv4_patchsize = sqrt(conv4_patchsize2);
 %% load images
-img1  = imread('sourceimages/010_CT.tif');
-img2  = imread('sourceimages/010_MR-T2.tif');
-figure;imshow(img1);
-figure;imshow(img2);
+% img1  = imread('sourceimages/010_CT.tif');
+% img2  = imread('sourceimages/010_MR-T2.tif');
+[img1 ,img2 ,result]=oral(1,'CNN');
+img1=img1(:,:,2);
+img2=img2(:,:,2);
+figure;imshow(uint8(img1));
+figure;imshow(uint8(img2));
 tic;
 
 img1 = double(img1)/255;
@@ -146,4 +149,5 @@ imgf = reconstruct_laplacian_pyramid(pyr);
 toc;
 
 figure;imshow(uint8(imgf*255));
-imwrite(uint8(imgf*255),'results/fused.tif');
+  imwrite(imgf,result)
+% imwrite(uint8(imgf*255),'results/fused.tif');
