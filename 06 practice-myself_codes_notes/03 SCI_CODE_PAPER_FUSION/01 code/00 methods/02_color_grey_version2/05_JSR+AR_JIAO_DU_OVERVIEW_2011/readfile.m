@@ -25,6 +25,7 @@ clc,clear
 [img1,img2 ,result]=oral(3,'JSR-AR')
 
     [y,SSIM,RMSE,MI,PSNR,SF, G, P, C QE]= ksvd_fusion(img1, img2);
+    imshow(uint8(y),[])
       imwrite(uint8(y),result)
 %     dir3=[tr,tr3,int2str(i)];
 %     imshow(uint8(y),[])
