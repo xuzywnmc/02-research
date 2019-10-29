@@ -20,7 +20,7 @@ image_width=40/1000;      %  Size of image sector
 d_x=image_width/no_lines; %  Increment for image
 
 %  Read the data and adjust it in time 
-for j=1:50%做50张图
+for j=1:4%做50张图
 min_sample=0;
 for i=1:no_lines
 
