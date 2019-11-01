@@ -76,7 +76,7 @@ gengxin_flag=0;
   %************************血管位移定义*******************
   for j=1:20
       if j==1
-         xueguan_yidong(j)=flag*2.5/1000; 
+         xueguan_yidong(j)=flag*3/1000; 
       else
       xueguan_yidong(j)=xueguan_yidong(j-1)+flag*(2.5/1000);
       end

@@ -57,6 +57,6 @@ ylabel('Axial distance [mm]')
 colormap(gray(127))
 axis('image')
 axis([-20 20 35 90])
-str=['image/f' num2str(j) '.jpg'];
+str=['./image/f' num2str(j) '.jpg'];
 saveas(gcf,str);%创建条形图并将其另存为 JPG 文件
 end

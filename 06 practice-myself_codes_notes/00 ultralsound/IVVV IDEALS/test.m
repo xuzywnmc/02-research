@@ -12,4 +12,4 @@ d=find(e>=4);
 %     imwrite(temp,str,'jpg')
 % end
 % end
-CreatVideoFromPic( './image', 'jpg','presentation5.avi');
+CreatVideoFromPic( './image', 'jpg','presentation6.avi');
