@@ -17,13 +17,15 @@ end
 IMin=IMin0+sigma*randn(size(IMin0));
 % PSNRIn = 20*log10(255/sqrt(mean((IMin(:)-IMin0(:)).^2)));
 % [IoutAdaptive,output] = denoiseImageKSVD(IMin, sigma,K);
-path='C:\E-DATA-GROUNP\github\02-research\06 practice-myself_codes_notes\03 SCI_CODE_PAPER_FUSION\01 code\00 methods\02_color_grey_version2\SOUCEIMAGES\oral'
- path1=strcat(path,'\MP\PET-009.jpg'),
-  path2=strcat(path,'\MP\MRI-009.jpg'),
-   result=strcat(path,'\MP\JSR-AR3.jpg');
+path='C:\E-DATA-GROUNP\github\02-research\06 practice-myself_codes_notes\03 SCI_CODE_PAPER_FUSION\01 code\00 methods\03_proposed\metrics measures\image\'
+
+                path1=strcat(path,'SPECT-009.jpg'),
+                path2=strcat(path,'MRI-009.jpg'),
+                result=strcat(path,'NSST+PAPCNN3.jpg');
+
      img1 =double(imread(path1));
     img2=double(imread(path2));
-      result=double(imread(result));
+    result=double(imread(result));
 [SSIM2,RMSE2,MI2,PSNR2,SF2]=quality(img1,img2,result);
 % y = IoutAdaptive;
 

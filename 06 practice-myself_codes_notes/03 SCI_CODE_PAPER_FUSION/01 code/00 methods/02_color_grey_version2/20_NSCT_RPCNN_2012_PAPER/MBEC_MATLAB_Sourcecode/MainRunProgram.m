@@ -38,7 +38,7 @@ filename1 = 'a1.bmp';
 filename2 = 'b1.bmp';
 % imA= imread(filename1);
 % imB= imread(filename2);
-[imA,imB ,result]=oral(1,'NSCT-RPCNN')
+[imA,imB ,result]=oral(3,'NSCT-RPCNN')
 imA=imA(:,:,2);
 imB=imB(:,:,2);
 %% Find the filenames and extensions of the source images considering there
