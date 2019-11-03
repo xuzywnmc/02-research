@@ -10,8 +10,8 @@ addpath(genpath('shearlet'));
 temp=A;
 A=B(:,:,2);
 B=temp;
-figure;imshow(A);
-figure;imshow(B);
+figure;imshow(uint8(A),[]);
+figure;imshow(uint8(B),[]);
 
 img1 = double(A)/255;
 img2 = double(B)/255;
