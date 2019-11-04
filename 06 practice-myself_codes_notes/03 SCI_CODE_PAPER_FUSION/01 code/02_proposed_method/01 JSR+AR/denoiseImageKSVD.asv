@@ -208,13 +208,11 @@ DCT=kron(DCT,DCT);%%%%%跟DCT中的代码一样的
 %64*256的矩阵
 
 param.initialDictionary = DCT(:,1:param.K );
-% 取了256列。也就是全部都取了
 param.InitializationMethod =  'GivenMatrix';
 
 if (reduceDC)
     vecOfMeans = mean(blkMatrix);
     blkMatrix = blkMatrix-ones(size(blkMatrix,1),1)*vecOfMeans;
-%减去平均数  blkMatrix矩阵大小为：64*[（NN1-bb+1）*(NN2-bb+1)]
 end
 
 if (waitBarOn)
@@ -226,10 +224,9 @@ end
 
 
 param.displayProgress = displayFlag;
-%%%%%%%最核心的函数%%%%%%%%%%%%%%%%
 [Dictionary,output] = KSVD(blkMatrix,param);
 output.D = Dictionary;
-%这里得到的Dictionary就是KSVD迭代更新好的最终的Dictionnary
+
 if (displayFlag)
     disp('finished Trainning dictionary');
 end
@@ -249,7 +246,7 @@ if (waitBarOn)
     newCounterForWaitBar = (param.numIteration+1)*size(blocks,2);
 end
 
-%用KSVD得到的字典计算稀疏系数
+
 % go with jumps of 30000
 for jj = 1:30000:size(blocks,2)
     if (waitBarOn)
@@ -263,14 +260,13 @@ for jj = 1:30000:size(blocks,2)
     
     %Coefs = mexOMPerrIterative(blocks(:,jj:jumpSize),Dictionary,errT);
     Coefs = OMPerr(Dictionary,blocks(:,jj:jumpSize),errT);
-    %使用OMP计算稀疏系数
     if (reduceDC)
         blocks(:,jj:jumpSize)= Dictionary*Coefs + ones(size(blocks,1),1) * vecOfMeans;
     else
         blocks(:,jj:jumpSize)= Dictionary*Coefs ;
     end
 end
-%用计算得到的稀疏系数，来进行重构patch，然后按照权重进行叠加
+
 count = 1;
 Weight = zeros(NN1,NN2);
 IMout = zeros(NN1,NN2);

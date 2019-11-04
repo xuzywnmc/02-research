@@ -23,26 +23,22 @@
 %     img2= double(imread(dir2));
 clc,clear
 [img1,img2 ,result]=oral(3,'JSR-AR')
-%%
-%小测试 试试是不是直接做效果一样
-% output1 = img1(:,:,1);
-% output2 = img2(:,:,1);
-% % Y(:,:,1)  = 0.5.*(output + output1);
-% Y(:,:,1)  = 0.6*output1 + 0.4*output2;
-% output1 = img1(:,:,2);
-% output2 = img2(:,:,2);
-% % Y(:,:,1)  = 0.5.*(output + output1);
-% Y(:,:,2)  = 0.6*output1 + 0.4*output2;
-% input1 = img1(:,:,3);
-% output2 = img2(:,:,3);
-% % Y(:,:,1)  = 0.5.*(output + output1);
-% Y(:,:,3)  = 0.6*output1 + 0.4*output2;
-% imshow(uint8(Y),[]);
-%%
+output1 = img1(:,:,1);
+output2 = img2(:,:,1);
+% Y(:,:,1)  = 0.5.*(output + output1);
+Y(:,:,1)  = 0.6*output1 + 0.4*output1;
+input1 = img1(:,:,2);
+output2 = img2(:,:,2);
+% Y(:,:,1)  = 0.5.*(output + output1);
+Y(:,:,2)  = 0.6*output1 + 0.4*output2;
+input1 = img1(:,:,3);
+output2 = img2(:,:,4);
+% Y(:,:,1)  = 0.5.*(output + output1);
+Y(:,:,3)  = 0.6*output1 + 0.4*output1;
     [y,SSIM,RMSE,MI,PSNR,SF, G, P, C QE]= ksvd_fusion(img1, img2);
     imshow(uint8(y),[])
-%       imwrite(uint8(y),result)
-% %     dir3=[tr,tr3,int2str(i)];
+      imwrite(uint8(y),result)
+%     dir3=[tr,tr3,int2str(i)];
 %     imshow(uint8(y),[])
 % %     imwrite(uint8(y),strcat(dir3,'.jpg'));
 %     sum_SSIM = SSIM + sum_SSIM;
