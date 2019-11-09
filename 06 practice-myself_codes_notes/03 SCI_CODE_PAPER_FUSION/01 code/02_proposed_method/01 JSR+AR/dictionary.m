@@ -11,7 +11,7 @@ function y = dictionary(input)
 bb=8; % block size
 RR=4; % redundancy factor
 K=RR*bb^2; % number of atoms in the dictionary
-%½âµÃK=256
+
 sigma = 25; 
 % pathForImages ='';
 % 

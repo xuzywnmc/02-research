@@ -10,8 +10,7 @@ input1 = image1(:,:,1);
 output1 = dictionary(input1);
 % % % % % fuse
 
-% Y(:,:,1)  = 0.5.*(output + output1);
-Y(:,:,1)  = 0.6*output + 0.4*output1;
+Y(:,:,1)  = 0.5.*(output + output1);
 % % % % % % % % % % % % 
 % % % % % % % % % 
 input = image(:,:,2);
@@ -21,8 +20,7 @@ input1 = image1(:,:,2);
 output1 = dictionary(input1);
 % % % % % fuse
 
-% Y(:,:,2)  = 0.5.*(output + output1);
-Y(:,:,2)  = 0.6*output + 0.4*output1;
+Y(:,:,2)  = 0.5.*(output + output1);
 % % % % % % % % % % % % 
 % % % % % % % % % 
 input = image(:,:,3);
@@ -32,8 +30,7 @@ input1 = image1(:,:,3);
 output1 = dictionary(input1);
 % % % % % fuse
 
-% Y(:,:,3)  = 0.5.*(output + output1);
-Y(:,:,3)  = 0.6*output + 0.4*output1;
+Y(:,:,3)  = 0.5.*(output + output1);
 % % % % % % % % % % % % 
 out =Y;
 [SSIM,RMSE,MI,PSNR,SF] =quality(image,image1,out);

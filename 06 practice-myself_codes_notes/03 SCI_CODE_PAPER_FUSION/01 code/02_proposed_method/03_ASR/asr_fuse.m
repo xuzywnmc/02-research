@@ -28,13 +28,18 @@ D = D./repmat(norm_D, size(D, 1), 1);
 
 D_n=cell(dic_number,1);
 dict_length=size(Dn,2)/dic_number;
+%dict_length=256;
+%dic_number=6;
+%%
+%相当于把Dn64X1536分成6份 每份64X256
 for i=1:dic_number
     D_n{i,1}=Dn(:,(i-1)*dict_length+1:i*dict_length);
     norm_D = sqrt(sum(D_n{i,1}.^2, 1)); 
     D_n{i,1} = D_n{i,1}./repmat(norm_D, size(D_n{i,1}, 1), 1);
 end
-
+%%
 patch_size = sqrt(size(D, 1));
+%patch_size=8
 [h,w]=size(A);
 F=zeros(h,w);
 cntMat=zeros(h,w);
@@ -63,8 +68,10 @@ for ii = 1:length(gridx)
         patch_2 = B(yy:yy+patch_size-1, xx:xx+patch_size-1);
         mean2 = mean(patch_2(:));
         patch2 = patch_2(:) - mean2;
+%求方差
         f1=var(patch_1(:),1);
         f2=var(patch_2(:),1);
+        %如果方差越大 则选其作为求梯度
         if f1>f2
             Dx=imfilter(patch_1,dx);
             Dy=imfilter(patch_1,dy);
@@ -72,21 +79,12 @@ for ii = 1:length(gridx)
             Dx=imfilter(patch_2,dx);
             Dy=imfilter(patch_2,dy);
         end
+%         Dx为8X8  Dy也为8X8
         grad_mag=sqrt(Dx.*Dx+Dy.*Dy);
         grad_ori=atan(Dy./Dx)*180/pi;
-        idx=(grad_ori<0);
-        grad_ori(idx)=grad_ori(idx)+180;
-        index=grad_ori./r;
-        hist=zeros(dic_number,1);
-        for i=1:patch_size
-            for j=1:patch_size
-                p=ceil(index(i,j));
-                if p>=1&&p<=dic_number
-                    hist(p,1)=hist(p,1)+grad_mag(i,j);
-                end
-            end
-        end
-        [max_v,max_p]=max(hist);
+        %%
+        %如果梯度方向小于0 则加上180度
+       y
         flag=1;
         if max_v/sum(hist)>(1.5/dic_number)
             w1=omp2(D_n{max_p,1},patch1,G_n{max_p,1},epsilon);
@@ -119,6 +117,8 @@ for ii = 1:length(gridx)
         fprintf([num2str(ii), ' rows have been processed\n']);
     end
 end
+%idx是逻辑值 所以知道其如果所在位置逻辑值不为1 则
+%不会进行任何操作
 idx = (cntMat < 1);
 F(idx) = (A(idx)+B(idx))./2;
 cntMat(idx) = 1;
