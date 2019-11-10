@@ -1,6 +1,37 @@
 clc;clear;
-a=[1,2,3;4,5,6;7,8,9];
-a1=a(:);
+% a=[1,2,3;2,3,4];
+% b=[12,14,15;2,3,4];
+% c=[a,b];
+% for i=1:3
+% %        fenlei_geshu(i)=geshu(i);
+% %        eval(['data',num2str(i),'=','a',';']); 
+%             cd('.\MAT_DATA');
+%        currentFile = sprintf('sum_data%d.mat',i);
+%        load(currentFile)
+%        cd('..');
+% %        data=sum_data;
+% %         TRAIN_DICTIONARY(data,i)
+% end
+image_input1=double(imread('./2.jpg'));
+[OUTPUT,FORRI,AA,BB]=RGB2IHS(image_input1);
+A=OUTPUT(:,:,1);%取I分量
+% image_input1=A;
+% 先进行小规模实验 取四分之一 减小计算量
+figure;
+imshow(uint8(A),[]);
+[F]=TEST_DICTIONARY(A);
+figure;
+imshow(uint8(F),[]);
+% % temp=cell(1,4);
+% % temp(3)=num2cell(a);
+% for i=1:7
+%     kk=11;
+% disp(['the ',num2str(i-1),' image was finished,please waiting...']);
+%     
+% end
+% temp1=temp{1};
+% a1=a(:);
+% FENLEI_IAMGEDATA();
 % % b(:,:,1)=a;
 % % b(:,:,2)=a;
 % % b(:,:,3)=a;
@@ -41,10 +72,14 @@ a1=a(:);
 % temp=data_n(:,:,2)
 % temp(:,2)=a;
 % data_n(:,:,2)=temp
-i=1;
-imshow(uint8(F),[]);
+% i=1;
+% imshow(uint8(F),[]);
 %  randomData = rand(n);
 %    currentFile = sprintf('myfile%d.mat',i);
 %    save(currentFile,'a1')
 % data_n(:,:,1)=a;
 % temp=data_n(:,:,1);
+% image_input1=double(imread('./2.jpg'));
+% % [OUTPUT,FORRI,AA,BB]=RGB2IHS(image_input1);
+% % A=OUTPUT(:,:,1);%取I分量
+% IMAGE_TIDU_FENLEI(image_input1);

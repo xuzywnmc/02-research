@@ -1,0 +1,12 @@
+1、function FENLEI_IAMGEDATA()
+功能介绍：
+将TRAINDATA文件夹下所有MRI PET SPECT找出来 然后重新写到CHOOSEDATA_MRI
+CHOOSEDATA_MRI 文件夹下
+2、function SINGLE_IMAGE_TIDU_FENLEI(image_input1)
+功能介绍：
+把输入图像进行分解 并将分量I 根据梯度角分为7个存储到fenlei_data1`7中
+而且每加一个fenlei_data后面系数加10 如第一张图象I分量存储到fenlei_data1.mat
+第二张图像I分量梯度第一类存储到fenlei_data11.mat
+index.mat存储是第几张图象
+3、 function [A,F]=TEST_DICTIONARY(image_input1)
+输入图像 返回通过字典重构图像F
