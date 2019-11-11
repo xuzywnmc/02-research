@@ -32,10 +32,10 @@ params.memusage = 'high';
 params.codemode='error';
 [Dksvd,g,err] = ksvd(params,'');
 %  eval(['Dksvd',num2str(i),'=','Dksvd',';']);
- cd('.\MAT_DATA');
-    currentFile = sprintf('.\MAT_DATA\Dksvd%d.mat',i);
+%  cd('.\MAT_DATA');
+    currentFile = sprintf('Dksvd%d.mat',i);
    save(currentFile,'Dksvd')
-    cd('..');
+%     cd('..');
 %  eval([save,'DKSVD.data','Dksvd',num2str(i),';']); 
 % end
 end

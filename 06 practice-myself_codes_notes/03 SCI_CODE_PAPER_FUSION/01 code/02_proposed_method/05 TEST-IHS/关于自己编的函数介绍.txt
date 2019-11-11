@@ -4,9 +4,20 @@
 CHOOSEDATA_MRI 文件夹下
 2、function SINGLE_IMAGE_TIDU_FENLEI(image_input1)
 功能介绍：
-把输入图像进行分解 并将分量I 根据梯度角分为7个存储到fenlei_data1`7中
+把输入图像进行分解 并将分量（根据自己意愿输入哪个分量）
+ 根据梯度角分为7个存储到fenlei_data1`7中 八个像素如果和为0 则不计入
 而且每加一个fenlei_data后面系数加10 如第一张图象I分量存储到fenlei_data1.mat
 第二张图像I分量梯度第一类存储到fenlei_data11.mat
 index.mat存储是第几张图象
-3、 function [A,F]=TEST_DICTIONARY(image_input1)
-输入图像 返回通过字典重构图像F
+但是要注意 为了减少工作量 每次更新完一个分量都要把所有的mat文件删除
+   index=1+1000*channel;%第几张图片索引和第几个通道索引
+channel 0/1/2 分别表示I H S分量
+3、function TRAIN_DICTIONARY(data,i)
+功能介绍：
+将分类好的原图数据64 X A放入data变量中 并将数据梯度分类（第几梯度）i告诉函数
+4、function [A,F]=USE_DICTIONARY(image_input1)
+功能介绍：
+输入图像 返回通过字典重构图像F 并返回系数F
+5、STAGE_WORK 
+功能介绍：
+选择图像进行梯度分类 之后根据分类数据去使用字典训练 将得到的字典存储

@@ -1,4 +1,36 @@
 clc;clear;
+% channel=0;image_number=4;
+cd('C:\E-DATA-GROUNP\github\02-research\06 practice-myself_codes_notes\03 SCI_CODE_PAPER_FUSION\01 code\02_proposed_method\05 TEST-IHS\MAT_DATA');
+for channel=0:0
+    
+%             filename1=['sum_data',num2str(i),'.mat'];
+%         currentFile = sprintf('fenlei_dat.mat');
+   for i=1:2
+      currentFile = sprintf('sum_data%d.mat',i+channel*10);
+     load(currentFile);
+     data=sum_data;
+%      i=channel;
+      TRAIN_DICTIONARY(data,i+channel*10)
+   end
+end
+% channel 0/1/2 分别表示I H S分量
+%本函数功能是将每个通道已经训练好的7个fenlei_data和
+%sum_data index等数据移交到MAT_DATA文件夹下
+
+% cd('.\MAT_DATA');
+% cd('..');
+%%
+%%*********两种保存mat文件方式及名称中加入变量的测试***%*********
+% index=1;
+% k='I';
+% name=[k,'index.mat'];
+%    save(name,index);
+%    k='H';
+% name=[k,'index.mat'];
+%            currentFile = sprintf(name,i+(index-1)*10);
+%         save(currentFile,'fen_data','fen_geshu');
+%*********%*********%*********%*********%*********%*********
+   %%
 % a=[1,2,3;2,3,4];
 % b=[12,14,15;2,3,4];
 % c=[a,b];
@@ -12,16 +44,20 @@ clc;clear;
 % %        data=sum_data;
 % %         TRAIN_DICTIONARY(data,i)
 % end
-image_input1=double(imread('./2.jpg'));
-[OUTPUT,FORRI,AA,BB]=RGB2IHS(image_input1);
-A=OUTPUT(:,:,1);%取I分量
-% image_input1=A;
-% 先进行小规模实验 取四分之一 减小计算量
-figure;
-imshow(uint8(A),[]);
-[F]=TEST_DICTIONARY(A);
-figure;
-imshow(uint8(F),[]);
+%%
+%%**************字典恢复实验**************
+% image_input1=double(imread('./3.jpg'));
+% [OUTPUT,FORRI,AA,BB]=RGB2IHS(image_input1);
+% A=OUTPUT(:,:,1);%取I分量
+% % image_input1=A;
+% % 先进行小规模实验 取四分之一 减小计算量
+% figure;
+% imshow(uint8(A),[]);
+% [F]=TEST_DICTIONARY(A);
+% figure;
+% imshow(uint8(F),[]);
+%%******************************
+%%
 % % temp=cell(1,4);
 % % temp(3)=num2cell(a);
 % for i=1:7

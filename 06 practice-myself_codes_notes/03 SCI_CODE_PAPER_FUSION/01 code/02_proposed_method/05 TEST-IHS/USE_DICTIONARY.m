@@ -1,16 +1,16 @@
 %存储数据集类别
 %   clc;clear;
-function [F]=TEST_DICTIONARY(A)
+function [F,w1]=USE_DICTIONARY(A)
 [h,w]=size(A);
 for ii=1:7
-    cd('.\MAT_DATA');
+%     cd('.\MAT_DATA');%此处如果报错 则采用将字典文件复制到外面的方法
    currentFile = sprintf('Dksvd%d.mat',ii);
    load(currentFile);
 
    eval(['D','=','Dksvd',';']);
    G=D'*D;
    eval(['G',num2str(ii),'=','G',';']);
-          cd('..');
+%           cd('..');
 end
 patch_size=8;
 overlap=7;

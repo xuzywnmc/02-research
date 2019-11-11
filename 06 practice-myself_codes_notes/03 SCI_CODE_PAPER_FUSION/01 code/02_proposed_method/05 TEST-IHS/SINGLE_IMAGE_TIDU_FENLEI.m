@@ -1,4 +1,4 @@
-function SINGLE_IMAGE_TIDU_FENLEI(image_input1)
+function SINGLE_IMAGE_TIDU_FENLEI(image_input1,channel)
 %%功能介绍
 %%将image_input1进行字典训练
 %测试IHS变换及反变换函数
@@ -12,10 +12,12 @@ function SINGLE_IMAGE_TIDU_FENLEI(image_input1)
 % image_input1=double(imread('./2.jpg'));
 % % figure;
 % % imshow(uint8(image_input1),[]);
-[OUTPUT,FORRI,AA,BB]=RGB2IHS(image_input1);
-A=OUTPUT(:,:,1);%取I分量
+% [OUTPUT,FORRI,AA,BB]=RGB2IHS(image_input1);
+A=image_input1;%输入的就是各分量
+%%
 % 先进行小规模实验 取四分之一 减小计算量
-A=A(32:size(A,1)/2+32,32:size(A,2)/2+32);
+% A=A(size(A,1),size(A,2));
+%%
 % figure;
 % imshow(uint8(A),[]);
 % fenliang2=uint8(OUTPUT(:,:,2));
@@ -101,20 +103,23 @@ for ii = 1:length(gridx)
     end
 end
 sum_sum_geshu=zeros(7,1);
-cd('.\MAT_DATA')
+% cd('.\MAT_DATA');
 if exist('index.mat')
     load index.mat;
-    cd('..');
+%     cd('..');
 end
 for i=1:7
     temp=data_n(:,:,i);
     temp=temp(:,1:geshu(i));
 %     首先判断是否是第一张图片而且是i=1情况
-cd('.\MAT_DATA');
+% cd('.\MAT_DATA');
      if ~exist('sum_data1.mat')
-         index=1;%第几张图片索引
+         index=1;%第几张图片索引和第几个通道索引
+%          此处命名规则是说如果是通道0 说明和往常一样
+%          如果是通道1 则第一次进来的时候进入这个循环 然后第一张图像命名
+%          是从1001-1007 第二张则是1011-1017
          save index.mat index
-         cd('..');
+%          cd('..');
         %用来为每个梯度进行存储
 %         fen_data=cell(23,1);
 %         fen_geshu=zeros(23,1);
@@ -123,20 +128,20 @@ cd('.\MAT_DATA');
         %%分data存储
         %将i张图片1梯度所有像素存储
         fen_data=temp;
-        cd('.\MAT_DATA');
-        currentFile = sprintf('fenlei_data%d.mat',i+(index-1)*10);
+%         cd('.\MAT_DATA');
+        currentFile = sprintf('fenlei_data%d.mat',i+(index-1)*10+1000*channel);
         save(currentFile,'fen_data','fen_geshu');
-        cd('..');
+%         cd('..');
           %将i张图片1梯度总个数存储
 %         sum_data=cell(7,1);
 %         sum_geshu=zeros(7,1);
         sum_geshu=geshu(i);
 %         temp_sum_geshu=sum_geshu;
         sum_data=temp;
-        cd('.\MAT_DATA');
+%         cd('.\MAT_DATA');
         currentFile = sprintf('sum_data%d.mat',i);
         save(currentFile,'sum_data','sum_geshu');
-        cd('..');
+%         cd('..');
      else 
          
          if index==1%如果为1 说明第一张图像 所有的原始变量都要创建
@@ -147,40 +152,40 @@ cd('.\MAT_DATA');
                     %%分data存储
                     %将i张图片1梯度所有像素存储
                     fen_data=temp;
-                    cd('.\MAT_DATA');
-                    currentFile = sprintf('fenlei_data%d.mat',i+(index-1)*10);
+%                     cd('.\MAT_DATA');
+                    currentFile = sprintf('fenlei_data%d.mat',i+(index-1)*10+1000*channel);
                     save(currentFile,'fen_data','fen_geshu');
-                    cd('..');
+%                     cd('..');
                       %将i张图片1梯度总个数存储
 %                     sum_geshu=temp_sum_geshu;
                     sum_geshu=geshu(i);
 %                     temp_sum_geshu=sum_geshu;
                     sum_data=temp;
-                    cd('.\MAT_DATA');
+%                     cd('.\MAT_DATA');
                     currentFile = sprintf('sum_data%d.mat',i);
                     save(currentFile,'sum_data','sum_geshu');
-                    cd('..');
+%                     cd('..');
          else
                     fen_geshu=geshu(i);
                     %%分data存储
                     %将i张图片1梯度所有像素存储
                     fen_data=temp;
-                    cd('.\MAT_DATA');
-                    currentFile = sprintf('fenlei_data%d.mat',i+(index-1)*10);
+%                     cd('.\MAT_DATA');
+                    currentFile = sprintf('fenlei_data%d.mat',i+(index-1)*10+1000*channel);
                     save(currentFile,'fen_data','fen_geshu');
-                    cd('..');
-                       cd('.\MAT_DATA');
+%                     cd('..');
+%                        cd('.\MAT_DATA');
                       %把前sum——data装入 第二个开始的sum命名应该不一样
                      currentFile = sprintf('sum_data%d.mat',i);
                      load(currentFile);
-                        cd('..')
+%                         cd('..')
                         sum_sum_geshu(i)=sum_geshu+geshu(i);
                         sum_geshu=sum_sum_geshu(i);
                         sum_data=[sum_data,temp];
-                                   cd('.\MAT_DATA') ;   
+%                                    cd('.\MAT_DATA') ;   
                      currentFile = sprintf('sum_data%d.mat',i);
                     save(currentFile,'sum_data','sum_geshu');
-                    cd('..');
+%                     cd('..');
          end
      
         %%分data存储
@@ -192,12 +197,15 @@ cd('.\MAT_DATA');
     
      end
 end
- cd('.\MAT_DATA');
+%  cd('.\MAT_DATA');
 index=index+1;
 save index.mat index
-cd('..');
+% cd('..');
+ disp(['The channel ', num2str(channel+1),' was working!']);
  disp(['the ',num2str(index-1),' image was finished,please waiting...']);
+ if channel==2
  disp('congratulation! Matlab R2017a hopes everything will go well !');
+ end
  end
 %     if exist('fenlei_data.mat')
 %          load fenlei_data.mat
