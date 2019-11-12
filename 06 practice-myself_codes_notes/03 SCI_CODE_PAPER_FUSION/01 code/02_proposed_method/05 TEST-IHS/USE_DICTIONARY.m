@@ -1,16 +1,22 @@
 %存储数据集类别
 %   clc;clear;
-function [F,w1]=USE_DICTIONARY(A)
+function [F,xishu,max_p]=USE_DICTIONARY(A,channel)
+%关于系数说明
+%A是输入图像第几通道 channel是第几通道 不同通道选用不同字典
+%channel 0~2分别表示1~3通道
 [h,w]=size(A);
 for ii=1:7
 %     cd('.\MAT_DATA');%此处如果报错 则采用将字典文件复制到外面的方法
-   currentFile = sprintf('Dksvd%d.mat',ii);
+cd('C:\E-DATA-GROUNP\github\02-research\06 practice-myself_codes_notes\03 SCI_CODE_PAPER_FUSION\01 code\02_proposed_method\05 TEST-IHS\MAT_DATA');
+   currentFile = sprintf('Dksvd%d.mat',ii+channel*10);
    load(currentFile);
 
    eval(['D','=','Dksvd',';']);
    G=D'*D;
    eval(['G',num2str(ii),'=','G',';']);
 %           cd('..');
+cd('C:\E-DATA-GROUNP\github\02-research\06 practice-myself_codes_notes\03 SCI_CODE_PAPER_FUSION\01 code\02_proposed_method\05 TEST-IHS');
+%
 end
 patch_size=8;
 overlap=7;
@@ -78,11 +84,13 @@ for ii = 1:length(gridx)
 %             temp_data_n(:,geshu(max_p))=patch1;
 %             data_n(:,:,max_p)=temp_data_n;
 %%
-           currentFile = sprintf('Dksvd%d.mat',max_p);
+cd('C:\E-DATA-GROUNP\github\02-research\06 practice-myself_codes_notes\03 SCI_CODE_PAPER_FUSION\01 code\02_proposed_method\05 TEST-IHS\MAT_DATA');
+           currentFile = sprintf('Dksvd%d.mat',max_p+channel*10);
             load(currentFile);
+            cd('C:\E-DATA-GROUNP\github\02-research\06 practice-myself_codes_notes\03 SCI_CODE_PAPER_FUSION\01 code\02_proposed_method\05 TEST-IHS');
             eval(['G','=','G',num2str(max_p),';']);
-            w1=omp2(Dksvd,patch1,G,epsilon);
-            patch_f=Dksvd*w1;
+            xishu=omp2(Dksvd,patch1,G,epsilon);
+            patch_f=Dksvd*xishu;
             Patch_f = reshape(patch_f, [8, 8]);
              F(yy:yy+patch_size-1, xx:xx+patch_size-1) = F(yy:yy+patch_size-1, xx:xx+patch_size-1) + Patch_f+ mean1;
             cntMat(yy:yy+patch_size-1, xx:xx+patch_size-1) = cntMat(yy:yy+patch_size-1, xx:xx+patch_size-1) + 1;
@@ -92,11 +100,13 @@ for ii = 1:length(gridx)
 %%
         else
             max_p=7;
-             currentFile = sprintf('Dksvd%d.mat',max_p);
+            cd('C:\E-DATA-GROUNP\github\02-research\06 practice-myself_codes_notes\03 SCI_CODE_PAPER_FUSION\01 code\02_proposed_method\05 TEST-IHS\MAT_DATA');
+             currentFile = sprintf('Dksvd%d.mat',max_p+channel*10);
             load(currentFile);
+            cd('C:\E-DATA-GROUNP\github\02-research\06 practice-myself_codes_notes\03 SCI_CODE_PAPER_FUSION\01 code\02_proposed_method\05 TEST-IHS');
             eval(['G','=','G',num2str(max_p),';']);
-            w1=omp2(Dksvd,patch1,G,epsilon);
-            patch_f=Dksvd*w1;
+            xishu=omp2(Dksvd,patch1,G,epsilon);
+            patch_f=Dksvd*xishu;
             Patch_f = reshape(patch_f, [8, 8]);
              F(yy:yy+patch_size-1, xx:xx+patch_size-1) = F(yy:yy+patch_size-1, xx:xx+patch_size-1) + Patch_f+ mean1;
             cntMat(yy:yy+patch_size-1, xx:xx+patch_size-1) = cntMat(yy:yy+patch_size-1, xx:xx+patch_size-1) + 1;

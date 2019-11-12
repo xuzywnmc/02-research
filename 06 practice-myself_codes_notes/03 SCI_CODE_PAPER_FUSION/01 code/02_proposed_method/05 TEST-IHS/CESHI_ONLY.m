@@ -1,0 +1,13 @@
+ image_input1=double(imread('./3.jpg'));
+%  figure;
+%  imshow(uint8(image_input1),[]);
+%  [OUTPUT,FORRI,AA,BB]=RGB2IHS(image_input1);
+%  figure;
+%  imshow(uint8(OUTPUT(:,:,1)),[]);
+%  OUTPUT(:,:,1)=OUTPUT(:,:,1)/2;
+%   figure;
+%  imshow(uint8(OUTPUT(:,:,1)),[]);
+%  [OUTPUT,FORRI,AA,BB]=RGB2IHS(OUTPUT);
+%  figure;
+%  imshow(uint8(FORRI),[]);
+ imwrite(uint8(image_input1),'./a.jpg');

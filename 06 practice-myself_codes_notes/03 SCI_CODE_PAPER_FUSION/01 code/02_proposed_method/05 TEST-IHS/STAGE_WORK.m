@@ -1,5 +1,8 @@
 % function STAGE_WORK()
 clc;clear;
+fenlei=0;%单单执行分类部分
+svd=1;%单单执行字典部分
+if fenlei == 1
 cd('C:\E-DATA-GROUNP\github\02-research\06 practice-myself_codes_notes\03 SCI_CODE_PAPER_FUSION\01 code\02_proposed_method\05 TEST-IHS');
 %%本程序不宜形成函数 因为Load会报错
 % currentFile = sprintf('fenlei_data%d.mat',i); 
@@ -22,7 +25,7 @@ for channel=0:2%
         sf_set_p=zeros(1,300);
         temp_image_set=zeros(256,256,100);
         %此处是重新进入一个文件夹 在读取具体文件名情况下
-%         for j=3:1:7%先选4张图片
+%         for j=3:1:4%先选4张图片
          for j=3:1:length(fileNames1)%先选4张图片
             temp=char(fileNames1(1,j));
             temp_name=[fileFolder,'\',temp];
@@ -76,11 +79,12 @@ end
     %%
 
 end
-
+end
+if svd==1 %选择是否单单执行字典部分
 %%
     %  *********************************转换为字典程序*********************************
 cd('C:\E-DATA-GROUNP\github\02-research\06 practice-myself_codes_notes\03 SCI_CODE_PAPER_FUSION\01 code\02_proposed_method\05 TEST-IHS\MAT_DATA');
-for channel=0:2
+for channel=1:2
     
 %             filename1=['sum_data',num2str(i),'.mat'];
 %         currentFile = sprintf('fenlei_dat.mat');
@@ -91,6 +95,9 @@ for channel=0:2
 %      i=channel;
       TRAIN_DICTIONARY(data,i+channel*10)
    end
+end
+cd('C:\E-DATA-GROUNP\github\02-research\06 practice-myself_codes_notes\03 SCI_CODE_PAPER_FUSION\01 code\02_proposed_method\05 TEST-IHS');
+%
 end
 %%************************************end**********************
 %  end

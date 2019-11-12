@@ -16,7 +16,7 @@ function SINGLE_IMAGE_TIDU_FENLEI(image_input1,channel)
 A=image_input1;%输入的就是各分量
 %%
 % 先进行小规模实验 取四分之一 减小计算量
-% A=A(size(A,1),size(A,2));
+A=A(50:size(A,1)/2+50,50:size(A,2)/2+50);
 %%
 % figure;
 % imshow(uint8(A),[]);
