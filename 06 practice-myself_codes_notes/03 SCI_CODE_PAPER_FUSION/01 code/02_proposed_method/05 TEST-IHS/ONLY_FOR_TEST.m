@@ -1,3 +1,5 @@
+close all%这个一定不要加';'号
+%本程序包含两种加权方式的融合实验
 clc;clear;
 %%
 % zhanshi=0;
@@ -96,12 +98,33 @@ end
 end
 %*********************************end***********************************
 %%
-test_ronghe=1;
-shangxian=100;
-xiaxian=99;
-if test_ronghe==1
-    bufen=2;
 %************************************I分量为引导 RGB融合实验************
+test_ronghe=1;
+shangxian=70;
+xiaxian=69;
+    bufen=4;
+zhuangzai_xishu=1;%采用预先训练字典获取系数之后再融合
+   jiaquan=2;%加权方式选择
+if test_ronghe==1
+    if zhuangzai_xishu==1%预先装载节省时间
+        for channel=1:3
+                    currentFile = sprintf('%dfenlei_patch1.mat',channel);
+                    load(currentFile);
+                     eval(['temp_fenlei_patch1',num2str(channel),'=','cun_fenlei_patch1',';']);
+                     
+                    currentFile = sprintf('%dzidian_xishu_patch1.mat',channel);
+                    load(currentFile);
+                    eval(['temp_zidian_patch1',num2str(channel),'=','cun_xishu_patch1',';']);
+                    
+                    currentFile = sprintf('%dfenlei_patch2.mat',channel);
+                    load(currentFile);
+                     eval(['temp_fenlei_patch2',num2str(channel),'=','cun_fenlei_patch2',';']);
+                     
+                    currentFile = sprintf('%dzidian_xishu_patch2.mat',channel);
+                    load(currentFile);
+                     eval(['temp_zidian_patch2',num2str(channel),'=','cun_fenlei_patch2',';']);
+        end
+    end
 image_input1=double(imread('./2.jpg'));
 image_input2=double(imread('./3.jpg'));
 % image_input1=imresize(image_input1,[256 256]);
@@ -130,23 +153,24 @@ overlap=7;
 A100=A;
 B100=B;
 for channel=1:3
+windows=0;
 A=A100(:,:,channel);
 B=B100(:,:,channel)
-[h,w]=size(B);
-F=zeros(h,w);
-cntMat=zeros(h,w);
+[kuan,chang]=size(B);
+F=zeros(kuan,chang);
+cntMat=zeros(kuan,chang);
 
-gridx = 1:patch_size - overlap : w-patch_size+1;
-gridy = 1:patch_size - overlap : h-patch_size+1;
+gridx = 1:patch_size - overlap : kuan-patch_size+1;
+gridy = 1:patch_size - overlap : chang-patch_size+1;
 dx=[-1 0 1;-2 0 2;-1 0 1];
 dy=dx';
 
 
 for ii = 1:length(gridx)
     for jj = 1:length(gridy)
+        windows=windows+1;
         xx = gridx(ii);
         yy = gridy(jj);
-        
         patch_1 = A(yy:yy+patch_size-1, xx:xx+patch_size-1);
         mean1 = mean(patch_1(:));
         patch1 = patch_1(:) - mean1;
@@ -172,12 +196,20 @@ for ii = 1:length(gridx)
 %%***********************************end***************************** 
    %%****加权方式一配套****************************
    %如果采用方式二 这里就可以注释了
-   jiaquan=1;%加权方式选择
-   if jiaquan==1
-      [F1,xishu,max_p1]=USE_DICTIONARY(patch_1,0);
-      w1=xishu;
-      [F2,xishu,max_p2]=USE_DICTIONARY(patch_2,0);
-      w2=xishu;
+   if jiaquan==1 | 2
+       if zhuangzai_xishu==0%换系数获取方式 换成通过查找系数的方式获取
+          [F1,xishu,max_p1]=USE_DICTIONARY(patch_1,0);
+          w1=xishu;
+          [F2,xishu,max_p2]=USE_DICTIONARY(patch_2,0);
+          w2=xishu;
+       else
+           eval(['cun_fenlei_patch1','=','temp_fenlei_patch1',num2str(channel),';']);
+           w1=cun_xishu_patch1(:,windows);
+           max_p1=cun_fenlei_patch1(windows);
+           eval(['cun_fenlei_patch1','=','temp_fenlei_patch2',num2str(channel),';']);
+           w2=cun_xishu_patch1(:,windows);
+           max_p2=cun_fenlei_patch1(windows);
+       end
    end
       %%
         mean_f=(mean1+mean2)/2;
@@ -185,40 +217,52 @@ for ii = 1:length(gridx)
        if percent_patch1 > percent_patch2     
                                %%
                           %*************************加权方式二配套******************************
-
                           if jiaquan==2
-                          [F1,xishu,max_p1]=USE_DICTIONARY(patch_1,0);
-                               w=xishu;
-                                    %%
+%                                if zhuangzai_xishu==0%换系数获取方式 换成通过查找系数的方式获取
+%                                       [F1,xishu,max_p1]=USE_DICTIONARY(patch_1,0);
+%                                       w=xishu;
+%                                else
+%                                        disp('percent_patch1 > percent_patch2 jiaquan=2 zhuangzai_xishu=1');
+%                                        eval(['cun_fenlei_patch1','=','temp_fenlei_patch1',num2str(channel),';']);
+%                                        max_p1=cun_fenlei_patch1(windows);
+%                                        w=cun_xishu_patch1(:,windows);
+%                                end
+                               w=w1;
+                          end
                                %%***************************加权方式一配套**********************
                           else if jiaquan==1
                                    temp_max=max(abs(percent_patch1),abs(percent_patch2));
-                               w=w1*(temp_max/sum_percent)+w2*(1-(temp_max/sum_percent));
+                                   w=w1*(temp_max/sum_percent)+w2*(1-(temp_max/sum_percent));
                               end
-                          end
+                          
                     %%
-
-                               cd('C:\E-DATA-GROUNP\github\02-research\06 practice-myself_codes_notes\03 SCI_CODE_PAPER_FUSION\01 code\02_proposed_method\05 TEST-IHS\MAT_DATA');
-                                currentFile = sprintf('Dksvd%d.mat',max_p1);
-                                load(currentFile);
-                                 patch_f=Dksvd*w;
-                                 cd('C:\E-DATA-GROUNP\github\02-research\06 practice-myself_codes_notes\03 SCI_CODE_PAPER_FUSION\01 code\02_proposed_method\05 TEST-IHS');
-
+                          cd('C:\E-DATA-GROUNP\github\02-research\06 practice-myself_codes_notes\03 SCI_CODE_PAPER_FUSION\01 code\02_proposed_method\05 TEST-IHS\MAT_DATA');
+                          currentFile = sprintf('Dksvd%d.mat',max_p1);
+                          load(currentFile);
+                          patch_f=Dksvd*w;
+                          cd('C:\E-DATA-GROUNP\github\02-research\06 practice-myself_codes_notes\03 SCI_CODE_PAPER_FUSION\01 code\02_proposed_method\05 TEST-IHS');
        end
-       if percent_patch1 < percent_patch2
+        if percent_patch1 < percent_patch2
            %%
                                %方式二套餐
                                if jiaquan==2
-                                 [F2,xishu,max_p2]=USE_DICTIONARY(patch_2,0);
-                                  w=xishu;
+%                                     if zhuangzai_xishu==0%换系数获取方式 换成通过查找系数的方式获取
+%                                           [F2,xishu,max_p2]=USE_DICTIONARY(patch_2,0);
+%                                           w2=xishu;
+%                                     else
+%                                            disp('percent_patch1 < percent_patch2 jiaquan=2 zhuangzai_xishu=1');
+%                                            eval(['cun_fenlei_patch1','=','temp_fenlei_patch2',num2str(channel),';']);
+%                                            max_p2=cun_fenlei_patch1(windows);
+%                                            w=cun_xishu_patch1(:,windows);
+%                                     end
+                                      w=w2;
+                                end
                                else if jiaquan==1
                                %%
                                %方式一套餐
                                temp_max=max(abs(percent_patch1),abs(percent_patch2));
                                w=w2*(temp_max/sum_percent)+w1*(1-(temp_max/sum_percent));
-                                   end
-                               end
-                    %%
+                                   end      
                                cd('C:\E-DATA-GROUNP\github\02-research\06 practice-myself_codes_notes\03 SCI_CODE_PAPER_FUSION\01 code\02_proposed_method\05 TEST-IHS\MAT_DATA');
                                 currentFile = sprintf('Dksvd%d.mat',max_p2);
                                 load(currentFile);
@@ -226,11 +270,20 @@ for ii = 1:length(gridx)
                                  cd('C:\E-DATA-GROUNP\github\02-research\06 practice-myself_codes_notes\03 SCI_CODE_PAPER_FUSION\01 code\02_proposed_method\05 TEST-IHS');
 
        end
-        if percent_patch1 == percent_patch2
-         [F1,xishu,max_p1]=USE_DICTIONARY(patch_1,0);
-         w1=xishu;
-         [F2,xishu,max_p2]=USE_DICTIONARY(patch_2,0);
-         w2=xishu;
+       if percent_patch1 == percent_patch2
+                     if zhuangzai_xishu==0%换系数获取方式 换成通过查找系数的方式获取
+                  [F1,xishu,max_p1]=USE_DICTIONARY(patch_1,0);
+                  w1=xishu;
+                  [F2,xishu,max_p2]=USE_DICTIONARY(patch_2,0);
+                  w2=xishu;
+               else
+                   eval(['cun_fenlei_patch1','=','temp_fenlei_patch1',num2str(channel),';']);
+                   max_p1=cun_fenlei_patch1(windows);
+                   w1=cun_xishu_patch1(:,windows);
+
+                   eval(['cun_fenlei_patch1','=','temp_fenlei_patch2',num2str(channel),';']);
+                   w2=cun_xishu_patch1(:,windows);
+                end
             w=(1/2)*(w1+w2);
             cd('C:\E-DATA-GROUNP\github\02-research\06 practice-myself_codes_notes\03 SCI_CODE_PAPER_FUSION\01 code\02_proposed_method\05 TEST-IHS\MAT_DATA');
             currentFile = sprintf('Dksvd%d.mat',max_p1);
@@ -238,10 +291,7 @@ for ii = 1:length(gridx)
              patch_f=Dksvd*w;
              cd('C:\E-DATA-GROUNP\github\02-research\06 practice-myself_codes_notes\03 SCI_CODE_PAPER_FUSION\01 code\02_proposed_method\05 TEST-IHS');
 
-       end
-
-%             patch_f=D*w;
-   
+     end 
         Patch_f = reshape(patch_f, [patch_size, patch_size]);
         Patch_f = Patch_f + mean_f;
         

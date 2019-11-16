@@ -443,29 +443,34 @@ end
 % % % % % % % % % % % % % % % % % % 计算空间频率
 function SF=space_frequency(X)
 % % % % % 一个参数
-X=double(X);
-[n0,n0]=size(X);%%%%   X是一个方阵
-X=double(X);                          %空间频率;
-RF=0;
-CF=0;
+SF=0;
+[n0,n0,k]=size(X);%%%%   X是一个方阵
+if k==3%不知道这里频率是否需要三个一起加
+   
+    X=double(X(:,:,2));
 
-for fi=1:n0
-    for fj=2:n0
-        RF=RF+(X(fi,fj)-X(fi,fj-1)).^2;
+    X=double(X);                          %空间频率;
+    RF=0;
+    CF=0;
+
+    for fi=1:n0
+        for fj=2:n0
+            RF=RF+(X(fi,fj)-X(fi,fj-1)).^2;
+        end
     end
-end
 
-RF=RF/(n0*n0);
+    RF=RF/(n0*n0);
 
-for fj=1:n0
-    for fi=2:n0
-        CF=CF+(X(fi,fj)-X(fi-1,fj)).^2;
+    for fj=1:n0
+        for fi=2:n0
+            CF=CF+(X(fi,fj)-X(fi-1,fj)).^2;
+        end
     end
-end
 
-CF=CF/(n0*n0);%%%%可以思考，空间频率是不是只描述一个方阵
+    CF=CF/(n0*n0);%%%%可以思考，空间频率是不是只描述一个方阵
+    SF=sqrt(RF+CF);
+    end
 
-SF=sqrt(RF+CF)
 end
 % % % % % % % % % % % % 计算标准差
 function e=stand_deviation(matrix)

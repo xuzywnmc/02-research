@@ -1,4 +1,5 @@
 %存储数据集类别
+%***************************本程序最大的问题就是当为0时 没有返回值了*******************
 %   clc;clear;
 function [F,xishu,max_p]=USE_DICTIONARY(A,channel)
 %关于系数说明
@@ -121,6 +122,9 @@ cd('C:\E-DATA-GROUNP\github\02-research\06 practice-myself_codes_notes\03 SCI_CO
         end
 
         else%如果为零则全部给回原值
+            xishu=zeros(256,1);
+            F=zeros(8,8);
+            max_p=1;
 %              F(yy:yy+patch_size-1, xx:xx+patch_size-1) = A(yy:yy+patch_size-1, xx:xx+patch_size-1) ;
                      end
     end
