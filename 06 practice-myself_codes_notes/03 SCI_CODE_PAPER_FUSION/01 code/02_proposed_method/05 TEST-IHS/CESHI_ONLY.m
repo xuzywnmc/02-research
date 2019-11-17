@@ -90,13 +90,13 @@ B=B100(:,:,channel)
 [kuan,chang]=size(B);
 F=zeros(kuan,chang);
 cntMat=zeros(kuan,chang);
-
+ 
 gridx = 1:patch_size - overlap : kuan-patch_size+1;
 gridy = 1:patch_size - overlap : chang-patch_size+1;
 dx=[-1 0 1;-2 0 2;-1 0 1];
 dy=dx';
-
-
+ 
+ 
 for ii = 1:length(gridx)
     for jj = 1:length(gridy)
         patch1_is_zeros=0;
@@ -105,17 +105,12 @@ for ii = 1:length(gridx)
         xx = gridx(ii);
         yy = gridy(jj);
         %注意点：为了避免开头注意点2陷阱 现进行预处理 先判断是不是为0
-
+ 
         %%
 %         ******************处理patch1模块***********************************
         patch_1 = A(yy:yy+patch_size-1, xx:xx+patch_size-1);
-        [temp_no_zero_hang_zuobiao,temp_no_zero_liebiao]=find(patch_1~=0);
-        if (length(temp_no_zero_hang_zuobiao))==0
-            mean1=zeros(64,1);
-        else
-             mean1 = sum(sum(patch_1))/(length(temp_no_zero_hang_zuobiao));
-        end
-%         patch1 = patch_1(:) - mean1;  
+        mean1 = mean(patch_1(:));
+        patch1 = patch_1(:) - mean1;
          %%*******************************求对应patch1突出度模块**************
         patch_I1 = I1(yy:yy+patch_size-1, xx:xx+patch_size-1);
         [temp_no_zero_hang_zuobiao,temp_no_zero_liebiao]=find(patch_I1~=0);
@@ -128,13 +123,8 @@ for ii = 1:length(gridx)
 %%
 %**********************************处理patch2模块******************************
         patch_2 = B(yy:yy+patch_size-1, xx:xx+patch_size-1);
-        [temp_no_zero_hang_zuobiao,temp_no_zero_liebiao]=find(patch_2~=0);
-        if (length(temp_no_zero_hang_zuobiao))==0
-            mean2=zeros(64,1);
-        else
-             mean2 = sum(sum(patch_2))/(length(temp_no_zero_hang_zuobiao));
-        end
-%         patch2 = patch_2(:) - mean2;  
+        mean2 = mean(patch_2(:));
+        patch2 = patch_2(:) - mean2;  
     %%*******************************求对应patch1突出度模块**************
            patch_I2 = I2(yy:yy+patch_size-1, xx:xx+patch_size-1);
            [temp_no_zero_hang_zuobiao,temp_no_zero_liebiao]=find(patch_I2~=0);
@@ -144,7 +134,7 @@ for ii = 1:length(gridx)
 %         [k1,k2]=max(max(A1));
         percent_patch2=sum(sum(A2))/(length(temp_no_zero_hang_zuobiao));%全部转为正数 但是如果全部为负数
 %         percent_patch2=sum(sum(A2))/(size(A2,1)*size(A2,2));%全部转为正数 但是如果全部为负数
-
+ 
 %%***********************************end***************************** 
    %%****加权方式一配套****************************
    %如果采用方式二 这里就可以注释了
@@ -189,26 +179,41 @@ for ii = 1:length(gridx)
       %%
         mean_f=(mean1+mean2)/2;
         sum_percent=abs(percent_patch1)+abs(percent_patch2);
-       if percent_patch1 > percent_patch2   
+       if percent_patch1 > percent_patch2  
+             P1atch_f=zeros(8,8);
               temp_max=max(abs(percent_patch1),abs(percent_patch2));
-              %为了提高对彩色部分表现能力 现如今采用对彩色部分远远低于均值的时候将所有的彩色部分全部加上
-%                     P1atch_f=patch_f_f1+mean1+patch_f_f2+mean2;
-                    P1atch_f=patch_f_f1+mean1+(patch_f_f2+mean2);
+              patch_f_f1=patch_f_f1+mean1;
+               patch_f_f1= reshape(patch_f_f1, [patch_size, patch_size]);
+              patch_f_f2=patch_f_f2+mean2;
+              patch_f_f2= reshape(patch_f_f2, [patch_size, patch_size]);
+              for k_1=1:8
+                  for k_2=1:8
+%                       if (uint8(patch_I1(k_1,k_2)))>mean_I1
+%                           P1atch_f(k_1,k_2)=patch_f_f1(k_1,k_2)+patch_f_f2(k_1,k_2);   
+%                           if abs((uint8(patch_f_f2(k_1,k_2))-uint8(P1atch_f(k_1,k_2))))>3%如果加了之后的差过于大了 那就不加了
+%                               P1atch_f(k_1,k_2)=patch_f_f2(k_1,k_2);
+%                           end
+%                       else
+                          P1atch_f(k_1,k_2)=patch_f_f2(k_1,k_2); 
+%                       end
+                  end
+              end
+                     Patch_f= reshape(P1atch_f, [patch_size, patch_size]);
        end
         if percent_patch1 < percent_patch2
               temp_max=max(abs(percent_patch1),abs(percent_patch2));
               %如果是彩色区域比重大 则全彩显示
-              if percent_patch1<0
+%               if percent_patch1<0
                    P1atch_f=patch_f_f2+mean2;
-              else
-                   P1atch_f=patch_f_f2+mean2+patch_f_f1*(1-(temp_max/sum_percent));
-              end
+               Patch_f= reshape(P1atch_f, [patch_size, patch_size]);
+%                    P1atch_f=patch_f_f2+mean2+patch_f_f1*(1-(temp_max/sum_percent));
+%               end
        end
        if percent_patch1 == percent_patch2
-            temp_max=max(abs(percent_patch1),abs(percent_patch2));
-              P1atch_f=(patch_f_f2+mean2)*(temp_max/sum_percent)+(patch_f_f1+mean1)*(1-(temp_max/sum_percent));
+            Patch_f=patch_f_f2+mean2;
+            Patch_f= reshape(Patch_f, [patch_size, patch_size]);
      end 
-        Patch_f= reshape(P1atch_f, [patch_size, patch_size]);
+       
         
         F(yy:yy+patch_size-1, xx:xx+patch_size-1) = F(yy:yy+patch_size-1, xx:xx+patch_size-1) + Patch_f;
         cntMat(yy:yy+patch_size-1, xx:xx+patch_size-1) = cntMat(yy:yy+patch_size-1, xx:xx+patch_size-1) + 1;
@@ -219,7 +224,7 @@ for ii = 1:length(gridx)
         disp(['The channel ', num2str(channel),' was working!']);      
     end
 end
-
+ 
 %idx是逻辑值 所以知道其如果所在位置逻辑值不为1 则
 %不会进行任何操作
 idx = (cntMat < 1);
@@ -228,10 +233,13 @@ cntMat(idx) = 1;
 F = F./cntMat;   
 Fusion_image(:,:,channel)=F;
 end
-
+ 
 figure;
 imshow(uint8(Fusion_image),[]);
 imwrite(uint8(Fusion_image),'./fusion_image.jpg');
 end
 %******************************************end**************************
 %%
+ 
+
+
