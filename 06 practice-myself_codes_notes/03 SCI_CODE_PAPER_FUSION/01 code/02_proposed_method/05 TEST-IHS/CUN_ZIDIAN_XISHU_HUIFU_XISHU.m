@@ -2,12 +2,12 @@ close all
 clc;clear;
 %本段程序采用两种模式功能 一是存系数 二是测试恢复系数效果
 
-huifu_xishu=1;
+huifu_xishu=0;
 huifu_xishu_patch1=0;
- huifu_xishu_patch2=1;
- cun_zidian_xishu=0;
- cun_xishu_patch1_flag=0;
- cun_xishu_patch2_flag=0;
+ huifu_xishu_patch2=0;
+ cun_zidian_xishu=1;
+ cun_xishu_patch1_flag=1;
+ cun_xishu_patch2_flag=1;
 if huifu_xishu==1
         for ii=1:7
         %     cd('.\MAT_DATA');%此处如果报错 则采用将字典文件复制到外面的方法
@@ -27,8 +27,8 @@ shangxian=1;
 xiaxian=0;
  bufen=1;
 %************************************I分量为引导 RGB融合实验************
-image_input1=double(imread('./2.jpg'));
-image_input2=double(imread('./3.jpg'));
+image_input1=double(imread('MRI-013.jpg'));
+image_input2=double(imread('PET-013.jpg'));
 % image_input1=imresize(image_input1,[256 256]);
 % image_input2=imresize(image_input2,[256 256]);
 A=zeros(size(image_input1,1)/bufen,size(image_input1,2)/bufen,3);

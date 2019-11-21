@@ -83,12 +83,6 @@ patch_size=8;
 overlap=7;
 A100=A;
 B100=B;
-A_R=A100(:,:,1);
-B_R=B100(:,:,1);
-A_G=A100(:,:,2);
-B_G=B100(:,:,2);
-A_B=A100(:,:,3);
-B_B=B100(:,:,3);
 for channel=1:3
 windows=0;
 A=A100(:,:,channel);
@@ -101,6 +95,8 @@ gridx = 1:patch_size - overlap : kuan-patch_size+1;
 gridy = 1:patch_size - overlap : chang-patch_size+1;
 dx=[-1 0 1;-2 0 2;-1 0 1];
 dy=dx';
+ 
+ 
 for ii = 1:length(gridx)
     for jj = 1:length(gridy)
         patch1_is_zeros=0;
@@ -113,12 +109,13 @@ for ii = 1:length(gridx)
         %%
 %         ******************处理patch1模块***********************************
         patch_1 = A(yy:yy+patch_size-1, xx:xx+patch_size-1);
-        A_R_patch_1 = A_R(yy:yy+patch_size-1, xx:xx+patch_size-1);
-        B_R_patch_2 = B_R(yy:yy+patch_size-1, xx:xx+patch_size-1);
-        B_G_patch_2 = B_G(yy:yy+patch_size-1, xx:xx+patch_size-1);
-        B_B_patch_2 = B_B(yy:yy+patch_size-1, xx:xx+patch_size-1);
-        mean1 = mean(patch_1(:));
-        patch1 = patch_1(:) - mean1;
+        [temp_no_zero_hang_zuobiao,temp_no_zero_liebiao]=find(patch_1~=0);
+        if (length(temp_no_zero_hang_zuobiao))==0
+            mean1=zeros(64,1);
+        else
+             mean1 = sum(sum(patch_1))/(length(temp_no_zero_hang_zuobiao));
+        end
+%         patch1 = patch_1(:) - mean1;  
          %%*******************************求对应patch1突出度模块**************
         patch_I1 = I1(yy:yy+patch_size-1, xx:xx+patch_size-1);
         [temp_no_zero_hang_zuobiao,temp_no_zero_liebiao]=find(patch_I1~=0);
@@ -131,8 +128,13 @@ for ii = 1:length(gridx)
 %%
 %**********************************处理patch2模块******************************
         patch_2 = B(yy:yy+patch_size-1, xx:xx+patch_size-1);
-        mean2 = mean(patch_2(:));
-        patch2 = patch_2(:) - mean2;  
+        [temp_no_zero_hang_zuobiao,temp_no_zero_liebiao]=find(patch_2~=0);
+        if (length(temp_no_zero_hang_zuobiao))==0
+            mean2=zeros(64,1);
+        else
+             mean2 = sum(sum(patch_2))/(length(temp_no_zero_hang_zuobiao));
+        end
+%         patch2 = patch_2(:) - mean2;  
     %%*******************************求对应patch1突出度模块**************
            patch_I2 = I2(yy:yy+patch_size-1, xx:xx+patch_size-1);
            [temp_no_zero_hang_zuobiao,temp_no_zero_liebiao]=find(patch_I2~=0);
@@ -190,23 +192,8 @@ for ii = 1:length(gridx)
        if percent_patch1 > percent_patch2   
               temp_max=max(abs(percent_patch1),abs(percent_patch2));
               %为了提高对彩色部分表现能力 现如今采用对彩色部分远远低于均值的时候将所有的彩色部分全部加上
-              if percent_patch2<0
-                    P1atch_f=patch_f_f1+mean1+patch_f_f2+mean2;
-              else
-                    P1atch_f=patch_f_f1+mean1+(patch_f_f2+mean2)*((temp_max/sum_percent));
-              end
-              Patch_f= reshape(P1atch_f, [patch_size, patch_size]);
-              only_for_test_rgb=patch_f_f2+mean2;
-              only_for_test_rgb= reshape(only_for_test_rgb, [patch_size, patch_size]);
-               
-              for k_1=1:8
-                  for k_2=1:8
-                      if ((A_R_patch_1(k_1,k_2)+B_R_patch_2(k_1,k_2))<=255) & ((A_R_patch_1(k_1,k_2)+B_G_patch_2(k_1,k_2))<=255) & ((A_R_patch_1(k_1,k_2)+B_B_patch_2(k_1,k_2))<=255)
-                          Patch_f(k_1,k_2)=only_for_test_rgb(k_1,k_2);
-                      end
-                  end
-              end
-
+%                     P1atch_f=patch_f_f1+mean1+patch_f_f2+mean2;
+                    P1atch_f=patch_f_f1+mean1+(patch_f_f2+mean2);
        end
         if percent_patch1 < percent_patch2
               temp_max=max(abs(percent_patch1),abs(percent_patch2));
@@ -248,3 +235,4 @@ imwrite(uint8(Fusion_image),'./fusion_image.jpg');
 end
 %******************************************end**************************
 %%
+
