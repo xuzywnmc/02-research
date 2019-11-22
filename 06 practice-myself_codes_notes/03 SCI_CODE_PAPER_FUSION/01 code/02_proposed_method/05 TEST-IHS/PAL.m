@@ -9,7 +9,7 @@
 % figure;
 % imshow(uint8(output),[]);
 function [med] = PAL(x)
-%UNTITLED2 此处显示有关此函数的摘要
+%UNTITLED2 此处显示有关此函数的摘要 模糊数学 王博发
 %x=rgb2gray(x);
 [M,N]=size(x);
 x1=double(x);
