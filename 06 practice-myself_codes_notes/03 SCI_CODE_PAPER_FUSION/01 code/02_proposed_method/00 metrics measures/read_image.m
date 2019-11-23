@@ -1,5 +1,5 @@
 function [img1,img2,result]=read_image(choose,method)
-path='C:\E-DATA-GROUNP\github\02-research\06 practice-myself_codes_notes\03 SCI_CODE_PAPER_FUSION\01 code\02_proposed\03 metrics measures\image\'
+path='.\image\'
      if choose ==1
                 path1=strcat(path,'MC\CT-009.jpg'),
                 path2=strcat(path,'MC\MRI-009.jpg'),
@@ -9,9 +9,9 @@ path='C:\E-DATA-GROUNP\github\02-research\06 practice-myself_codes_notes\03 SCI_
                 path2=strcat(path,'MP\MRI-009.jpg'),
                 result=strcat(path,'result\',method,'2.jpg');
         else if choose==3
-                path1=strcat(path,'SPECT-009.jpg'),
-                path2=strcat(path,'MRI-009.jpg'),
-                result=strcat(path,'MRI-SPECT\',method,'3.jpg');
+                path1=strcat(path,'PET-0093.jpg'),
+                path2=strcat(path,'MRI-0092.jpg'),
+                result=strcat(path,'MRI-PET\',method,'2.jpg');
             end
         end
      end

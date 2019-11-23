@@ -1,4 +1,4 @@
-function [OUTPUT,FORRI,AA,BB]=RGB2IHS(input)
+function [OUTPUT]=RGB2IHS(input)
 [M,N,Q]=size(input);
 OUTPUT=zeros(M,N,Q);
 FORRI=zeros(M,N,Q);

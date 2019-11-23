@@ -6,12 +6,14 @@ addpath(genpath('shearlet'));
 %% ×¢ÒâBÊÇÈýÎ¬
 % A=imread('sourceimages/s02_MR.tif');  %anatomical image
 % B=imread('sourceimages/s02_PET.tif'); %functional image
-[A ,B ,result]=oral(3,'NSST+PAPCNN');
+% [A ,B ,result]=oral(3,'NSST+PAPCNN');
+B=imread('MRI-0092.jpg');
+A=imread('PET-0093.jpg');
 temp=A;
 A=B(:,:,2);
 B=temp;
-figure;imshow(A);
-figure;imshow(B);
+figure;imshow(uint8(A));
+figure;imshow(uint8(B));
 
 img1 = double(A)/255;
 img2 = double(B)/255;
@@ -29,7 +31,8 @@ imgf_YUV(:,:,3)=img2_YUV(:,:,3);
 imgf=ConvertYUVtoRGB(imgf_YUV);
 
 F=uint8(imgf*255);
+
+imwrite(uint8(F),'result.jpg')
 figure,imshow(F);
-imwrite(uint8(F),result)
 % imwrite(F,'results/fused.tif');
 

@@ -48,8 +48,8 @@ imshow(uint8(B),[]);
 % end
 huifu_A=zeros(size(image_input1,1)/bufen,size(image_input1,2)/bufen,3);
 huifu_B=zeros(size(image_input1,1)/bufen,size(image_input1,2)/bufen,3);
-[I1,FORRI,AA,BB]=RGB2IHS(A);
-[I2,FORRI,AA,BB]=RGB2IHS(B);
+[I1]=RGB2IHS(A);
+[I2]=RGB2IHS(B);
 I1=I1(:,:,1);
 I2=I2(:,:,1);
 mean_I1=sum(sum(I1))/(size(I1,1)*size(I1,2));

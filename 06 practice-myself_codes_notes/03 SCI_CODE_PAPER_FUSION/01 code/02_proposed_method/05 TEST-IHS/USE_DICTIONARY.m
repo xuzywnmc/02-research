@@ -23,8 +23,8 @@ patch_size=8;
 overlap=7;
 gridx = 1:patch_size - overlap : w-patch_size+1;
 gridy = 1:patch_size - overlap : h-patch_size+1;
-
-epsilon=0.01;
+%误差改小点能够减少时间
+epsilon=0.1;
 %测试IHS变换及反变换函数
 % image_input1=double(imread('./2.jpg'));
 % figure;

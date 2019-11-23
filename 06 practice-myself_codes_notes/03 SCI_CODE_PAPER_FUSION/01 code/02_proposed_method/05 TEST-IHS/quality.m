@@ -2,12 +2,15 @@
 % 比较原图像与融合图像在HSI颜色空间的I分量的MSSIM值
 % % % % % % % % % % % % % % % % % % % % % % % 
 function [SSIM,RMSE,MI,PSNR,SF]=quality(x1,x2,f)
-%  HSI1 = rgb2hsi (x1);
-%  HSI2 = rgb2hsi (x2);
-%  HSIf = rgb2hsi (f);
+ HSI1 = RGB2IHS (x1);
+ HSI2 = RGB2IHS (x2);
+ HSIf = RGB2IHS (f);
  
  % % % % % % % % % % % % % % % % % % %  HSI颜色空间中I分量的MSSIM值
- I1=x1;I2=x2; If=f;  
+ I1=HSI1(:,:,3);I2=HSI2(:,:,3); If=HSIf(:,:,3);  
+ 
+ % % % % % % % % % % % % % % % % % % %  HSI颜色空间中I分量的MSSIM值
+%  I1=x1;I2=x2; If=f;  
 % % % % % % % % % % % % % %  
 K = [0.01 0.03]; window = fspecial('gaussian', 11, 1.5);L=5;
 % % % % % % % % % % % % % 
@@ -443,34 +446,29 @@ end
 % % % % % % % % % % % % % % % % % % 计算空间频率
 function SF=space_frequency(X)
 % % % % % 一个参数
-SF=0;
-[n0,n0,k]=size(X);%%%%   X是一个方阵
-if k==3%不知道这里频率是否需要三个一起加
-   
-    X=double(X(:,:,2));
+X=double(X);
+[n0,n0]=size(X);%%%%   X是一个方阵
+X=double(X);                          %空间频率;
+RF=0;
+CF=0;
 
-    X=double(X);                          %空间频率;
-    RF=0;
-    CF=0;
-
-    for fi=1:n0
-        for fj=2:n0
-            RF=RF+(X(fi,fj)-X(fi,fj-1)).^2;
-        end
+for fi=1:n0
+    for fj=2:n0
+        RF=RF+(X(fi,fj)-X(fi,fj-1)).^2;
     end
+end
 
-    RF=RF/(n0*n0);
+RF=RF/(n0*n0);
 
-    for fj=1:n0
-        for fi=2:n0
-            CF=CF+(X(fi,fj)-X(fi-1,fj)).^2;
-        end
+for fj=1:n0
+    for fi=2:n0
+        CF=CF+(X(fi,fj)-X(fi-1,fj)).^2;
     end
+end
 
-    CF=CF/(n0*n0);%%%%可以思考，空间频率是不是只描述一个方阵
-    SF=sqrt(RF+CF);
-    end
+CF=CF/(n0*n0);%%%%可以思考，空间频率是不是只描述一个方阵
 
+SF=sqrt(RF+CF)
 end
 % % % % % % % % % % % % 计算标准差
 function e=stand_deviation(matrix)

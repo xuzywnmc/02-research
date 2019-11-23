@@ -5,7 +5,7 @@ clc;clear;
 % DWT+Entropy
 %%
 %用于评价指标统一计算
-Path = '.\image\MRI-SPECT';                   % 设置数据存放的文件夹路径
+Path = '.\image\MRI-PET';                   % 设置数据存放的文件夹路径
 File = dir(fullfile(Path,'*.jpg'));  % 显示文件夹下所有符合后缀名为.txt文件的完整信息
 FileNames = {File.name}';            % 提取符合后缀名为.txt的所有文件的文件名，转换为n行1列
 for i=1:length(FileNames)
