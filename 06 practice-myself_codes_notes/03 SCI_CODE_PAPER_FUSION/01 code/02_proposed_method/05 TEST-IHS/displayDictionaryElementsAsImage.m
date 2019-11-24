@@ -55,8 +55,7 @@ end
 if (sortVarFlag)
     vars = var(D);
     [V,indices] = sort(vars');
-     V = fliplr(V);
-     indices = fliplr(indices);
+    indices = fliplr(indices);
     D = [D(:,1:sortVarFlag-1),D(:,indices+sortVarFlag-1)];
     signs = sign(D(1,:));
     signs(find(signs==0)) = 1;
@@ -88,5 +87,6 @@ end
 if (showImFlag) 
     I = I-min(min(min(I)));
     I = I./max(max(max(I)));
+%     imwrite(uint8(I),
     imshow(I,[]);
 end
